@@ -1,0 +1,8 @@
+<?php
+session_start();
+// unset($_SESSION['user']);
+if (isset($_SESSION['user'])) {
+    header('Location: user/');
+} else {
+    header('Location: auth/Login.php');
+}

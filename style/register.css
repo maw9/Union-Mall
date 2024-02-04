@@ -1,0 +1,70 @@
+    * {
+        font-family: 'Maven Pro', sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    .mall-name {
+        text-align: center;
+        margin-top: 32px;
+    }
+
+    .register-container {
+        display: inline-block;
+        border: 1px solid white;
+        padding: 40px 80px;
+        margin-top: 10vh;
+    }
+
+    label {
+        margin-bottom: 4px;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+        padding: 12px 16px;
+        width: 20vw;
+    }
+
+    input[type="submit"] {
+        background-color: black;
+        border: 1px solid white;
+        color: white;
+        padding: 16px 48px;
+        width: 100%;
+    }
+
+    .profile {
+        width: 250px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .email-error-alert,
+    .password-error-alert {
+        width: 35vw;
+        margin: 16px auto;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 12px 16px;
+    }
+
+    form {
+        align-items: start;
+    }
+
+    .profile img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        background-color: darkgrey;
+    }

@@ -1,0 +1,61 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.coupon {
+    height: 150px;
+    background-color: lightyellow;
+    border-radius: 16px;
+    border: 1px dashed lightgray;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.coupon:hover {
+    box-shadow: 0 10px 4px lightgray;
+}
+
+.coupon .icon {
+    width: 98px;
+    height: 98px;
+    position: relative;
+    margin-left: 48px;
+    margin-right: 48px;
+}
+
+.coupon .icon i {
+    font-size: 98px;
+    position: absolute;
+    color: gold;
+}
+
+.coupon .icon div {
+    text-align: center;
+    color: gray;
+    position: relative;
+    z-index: 1;
+    line-height: 98px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.coupon .discount {
+    margin-left: 100px;
+}
+
+.coupon .discount h2 {
+    font-weight: bold;
+}
+
+.coupon .discount span {
+    text-decoration: underline;
+
+}
+
+.coupon .divider {
+    width: 1px;
+    height: 150px;
+    border: 1px dashed lightgray;
+}

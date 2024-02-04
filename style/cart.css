@@ -1,0 +1,98 @@
+* {
+    font-family: 'Maven Pro', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-headers {
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(211, 211, 211, 0.597);
+    text-align: center;
+}
+
+.name-header {
+    text-align: start;
+}
+
+.cart-item {
+    border-bottom: 1px solid rgba(211, 211, 211, 0.597);
+    text-align: center;
+}
+
+.item-img img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item-name {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: start;
+}
+
+.remove-btn {
+    border: 1px solid rgba(211, 211, 211, 0.597);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.item-size {
+    border: 1px solid rgba(211, 211, 211, 0.597);
+    height: 48px;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-qty-control {
+    border: 1px solid rgba(211, 211, 211, 0.597);
+    display: inline-block;
+}
+
+.item-qty-control button {
+    width: 48px;
+    height: 48px;
+    border: none;
+}
+
+.item-qty-control .plus {
+    background-color: rgba(9, 29, 69, 1);
+    color: white;
+}
+
+.item-qty-control .plus:disabled {
+    background-color: rgba(9, 29, 69, 0.435);
+    color: white;
+}
+
+.item-qty-control div {
+    display: inline-block;
+    width: 48px;
+    text-align: center;
+}
+
+.item-price {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.cart-footer {
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(211, 211, 211, 0.597);
+    text-align: center;
+}
+
+.discount a {
+    text-decoration: none;
+}
