@@ -49,6 +49,42 @@ $create_user_table = "CREATE TABLE IF NOT EXISTS $user_table(
     profile_url VARCHAR(100)
 );";
 
+$create_order_table = "CREATE TABLE IF NOT EXISTS sale_order (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    created_at DATE,
+    user_id INT,
+    total_amount FLOAT,
+    FOREIGN KEY (user_id) REFERENCES $user_table(id)
+);";
+
+$create_order_product_table = "CREATE TABLE IF NOT EXISTS $order_product_table(
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    FOREIGN KEY (order_id) REFERENCES $order_table(id),
+    FOREIGN KEY (product_id) REFERENCES $product_table(id)
+);";
+
+$create_delivery_table = "CREATE TABLE IF NOT EXISTS $delivery_table(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    date_to_deliver DATE,
+    address TEXT,
+    order_id INT,
+    FOREIGN KEY (order_id) REFERENCES $order_table(id)
+);";
+
+$create_payment_table = "CREATE TABLE IF NOT EXISTS $payment_table(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    card_holder VARCHAR (60),
+    card_number VARCHAR (12),
+    exp_month VARCHAR (2),
+    exp_year VARCHAR (2),
+    cvv VARCHAR (3),
+    order_id INT,
+    FOREIGN KEY (order_id) REFERENCES $order_table(id)
+);";
+
+
 
 try {
     $pdo->exec($create_category_table);
@@ -64,10 +100,22 @@ try {
     echo "Tag table has been created!" . "<br>";
 
     $pdo->exec($create_product_tag_table);
-    echo "Product Tag Join table has been created!"  . "<br>";
+    echo "Product Tag Join table has been created!" . "<br>";
 
     $pdo->exec($create_user_table);
-    echo "User table has been created!";
+    echo "User table has been created!" . "<br>";
+
+    $pdo->exec($create_order_table);
+    echo "Order table has been created!" . "<br>";
+    
+    $pdo->exec($create_order_product_table);
+    echo "Order Product Join table has been created!" . "<br>";
+
+    $pdo->exec($create_delivery_table);
+    echo "Delivery table has been created!" . "<br>";
+
+    $pdo->exec($create_payment_table);
+    echo "Payment table has been created!" . "<br>";
 } catch (PDOException $pde) {
     echo $pde->getMessage();
 }
