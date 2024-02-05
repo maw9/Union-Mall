@@ -23,25 +23,25 @@ $discounts = [5, 10, 15, 30];
             <div class="col-3"></div>
         </div>
         <?php foreach ($discounts as $each) : ?>
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col">
-                    <a href="Cart.php?discount=<?= $each ?>">
-                        <div class="coupon">
-                            <div class="icon">
-                                <i class="fa-solid fa-certificate"></i>
-                                <div><?= $each ?>%</div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="discount">
-                                <h4>Offer for customer.</h4>
-                                <h2>All Products<br><span><?= $each ?>%</span> Discount.</h2>
-                            </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col">
+                <a href="PlaceOrder.php?discount=<?= $each ?>">
+                    <div class="coupon">
+                        <div class="icon">
+                            <i class="fa-solid fa-certificate"></i>
+                            <div><?= $each ?>%</div>
                         </div>
-                    </a>
-                </div>
-                <div class="col-3"></div>
+                        <div class="divider"></div>
+                        <div class="discount">
+                            <h4>Offer for customer.</h4>
+                            <h2>All Products<br><span><?= $each ?>%</span> Discount.</h2>
+                        </div>
+                    </div>
+                </a>
             </div>
+            <div class="col-3"></div>
+        </div>
         <?php endforeach; ?>
     </div>
 </body>

@@ -1,0 +1,43 @@
+* {
+    font-family: 'Maven Pro', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.order-summary {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.cart-items, .discount {
+    border-bottom: 1px solid lightgray;
+}
+
+.discount a {
+    text-decoration: none;
+}
+
+.accept-payments {
+    width: 400px;
+}
+
+#expiration-month, #expiration-year, #cvv {
+    width: 80px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 16px;
+}
+
+#cvv {
+    width: 180px;
+}
+
+.first-container, .delivery-container, .payment-container {
+    /* border: 1px solid lightgray; */
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 5px 5px 10px lightgray;
+    background-color: whitesmoke;
+}
