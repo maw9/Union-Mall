@@ -9,4 +9,6 @@ $order_table = "sale_order";
 $order_product_table = "order_product";
 $delivery_table = "delivery";
 $payment_table = "payment";
+$feedback_table = "feedback";
+
 

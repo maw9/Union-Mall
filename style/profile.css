@@ -27,14 +27,6 @@ body {
     right: 0;
 }
 
-#back-to-home {
-    left: 0;
-    background-color: white;
-    color: black;
-    outline: none;
-    border: none;
-}
-
 .main {
     height: 90vh;
     display: flex;

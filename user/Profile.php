@@ -42,7 +42,7 @@ if (isset($_GET['home'])) {
 <body>
     <form method="get">
         <div class="profile-nav">
-            <button id="back-to-home" name="home">HOME</button>
+            <button id="back-to-home" name="home" class="btn btn-outline-light">HOME</button>
             <button id="logout" name="logout" class="btn btn-outline-danger" style="display: <?= isset($_SESSION['user']) ? "block" : "none" ?>">Logout</button>
             <h1>Profile</h1>
         </div>

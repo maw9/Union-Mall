@@ -92,3 +92,9 @@
     border-bottom: 1px solid rgba(211, 211, 211, 0.597);
     text-align: center;
 }
+
+.empty-cart-text {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}

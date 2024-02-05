@@ -18,8 +18,6 @@ if (isset($_GET['discount'])) {
     $discount = $_GET['discount'];
 }
 
-// $total = $subtotal - $discount;
-
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +42,8 @@ if (isset($_GET['discount'])) {
             <div class="col-1">Remove</div>
             <div class="col-2">Price</div>
         </div>
+
+        <h3 style="display: <?= ($subtotal == 0) ? "block" : "none" ?>;" class="empty-cart-text">Empty Cart. Browse and add some items.</h3>
 
         <?php foreach ($cart_items as $each) : ?>
         <div id="cart-item-<?= $each['id'] ?>" class="row cart-item d-flex align-items-center mt-3 pb-3">
@@ -99,7 +99,7 @@ if (isset($_GET['discount'])) {
             <div class="col-1"></div>
             <div class="col-2"></div>
             <div class="col-2">
-                <a href="PlaceOrder.php" class="btn btn-dark py-3 px-5">Checkout</a>
+                <button id="check-out-btn" style="display: <?= (isset($_SESSION['cart']) && $subtotal > 0) ? "block" : "none" ?> ;" onClick="window.location.href = '<?= !isset($_SESSION['user']) ? '../auth/Login.php' : 'PlaceOrder.php' ?>'" class="btn btn-dark py-3 px-5">Checkout</button>
             </div>
         </div>
     </div>
@@ -146,6 +146,13 @@ if (isset($_GET['discount'])) {
                 }
                 const sub_total = document.getElementById(`sub-total`);
                 sub_total.textContent = (result.subtotal ?? 0) + " MMK";
+
+                const check_out_btn = document.getElementById(`check-out-btn`);
+                check_out_btn.style.display = ((result.subtotal ?? 0) > 0) ? "block" : "none";
+
+                const empty_cart_text = document.querySelector(`.empty-cart-text`);
+                empty_cart_text.style.display = ((result.subtotal ?? 0) == 0) ? "block" : "none";
+
             });
     }
 
@@ -160,6 +167,13 @@ if (isset($_GET['discount'])) {
                 }
                 const sub_total = document.getElementById(`sub-total`);
                 sub_total.textContent = (result.subtotal ?? 0) + " MMK";
+
+                const check_out_btn = document.getElementById(`check-out-btn`);
+                check_out_btn.style.display = ((result.subtotal ?? 0) > 0) ? "block" : "none";
+
+                const empty_cart_text = document.querySelector(`.empty-cart-text`);
+                empty_cart_text.style.display = ((result.subtotal ?? 0) == 0) ? "block" : "none";
+
             });
     }
     </script>

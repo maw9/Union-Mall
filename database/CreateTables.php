@@ -84,6 +84,14 @@ $create_payment_table = "CREATE TABLE IF NOT EXISTS $payment_table(
     FOREIGN KEY (order_id) REFERENCES $order_table(id)
 );";
 
+$create_feedback_table = "CREATE TABLE IF NOT EXISTS $feedback_table(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR (60),
+    email VARCHAR (60),
+    subject VARCHAR (100),
+    message TEXT
+);";
+
 
 
 try {
@@ -116,6 +124,9 @@ try {
 
     $pdo->exec($create_payment_table);
     echo "Payment table has been created!" . "<br>";
+
+    $pdo->exec($create_feedback_table);
+    echo "Feedback table has been created!" . "<br>";
 } catch (PDOException $pde) {
     echo $pde->getMessage();
 }

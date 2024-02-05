@@ -73,6 +73,9 @@ if (isset($_POST['place-order'])) {
         echo $pde->get_message();
     }
 
+    unset($_SESSION['cart']);
+    header("Location: Products.php");
+
 }
 
 
