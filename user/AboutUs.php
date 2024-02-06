@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("../style/Head.php");
 require_once('Nav.php');
 

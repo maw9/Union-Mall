@@ -35,7 +35,7 @@ if (isset($_SESSION['cart'])) {
             <li><a href="Index.php">Home</a></li>
             <li><a href="AboutUs.php">About</a></li>
             <li><a href="Products.php">Products</a></li>
-            <li><a href="#">Categories</a></li>
+            <li><a href="OrderHistory.php">Orders</a></li>
             <li><a href="ContactUs.php">Contact</a></li>
         </ul>
         <h1>Union Mall</h1>

@@ -1,0 +1,30 @@
+* {
+    font-family: 'Maven Pro', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.order-item {
+    background-color: #fbf9f9;
+    padding: 48px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px lightgray;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.order-item i {
+    font-size: 32px;
+}
+
+.empty-order {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 30vh;
+}
+
+.order-history-title {
+    margin-top: 8vh;
+}
+
