@@ -33,7 +33,7 @@ if (isset($_SESSION['cart'])) {
     <div class="nav-bar">
         <ul>
             <li><a href="Index.php">Home</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="AboutUs.php">About</a></li>
             <li><a href="Products.php">Products</a></li>
             <li><a href="#">Categories</a></li>
             <li><a href="ContactUs.php">Contact</a></li>

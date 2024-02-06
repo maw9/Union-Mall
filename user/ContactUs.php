@@ -1,5 +1,6 @@
 <?php
 require_once("../style/Head.php");
+require_once('Nav.php');
 require_once("../database/TableNames.php");
 require_once("../database/Connect.php");
 
@@ -33,7 +34,7 @@ if (isset($_POST['send-message'])) {
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <h1 class="title mt-4">Contact Us</h1>
+                <h1 class="title">Contact Us</h1>
                 <div class="container-fluid mt-5">
                     <div class="row contact-form">
                         <div class="col-7 p-5">
