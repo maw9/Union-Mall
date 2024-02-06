@@ -15,34 +15,35 @@ if (isset($_SESSION['user'])) {
         $stmt = $pdo->query($order_histories_query);
         $order_histories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $pde) {
-        $pde->get_message();
+        $pde->getMessage();
     }
-
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders</title>
     <link rel="stylesheet" href="../style/order_history.css">
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
+            <div class="col-2"></div>
+            <div class="col-8">
                 <h1 class="order-history-title mb-4">Orders History</h1>
                 <div class="container">
-                    <?php if (sizeof($order_histories) == 0): ?>
+                    <?php if (sizeof($order_histories) == 0) : ?>
                         <div class="empty-order">
                             There is no order made.
                         </div>
                     <?php endif; ?>
-                    <?php foreach($order_histories as $each): ?>
+                    <?php foreach ($order_histories as $each) : ?>
                         <div class="row order-item mb-4" onClick="window.location.href = 'OrderHistoryDetail.php?order_id=<?= $each['id'] ?>';">
                             <div class="col-1">
                                 <i class="fa-solid fa-dolly"></i>
@@ -60,8 +61,9 @@ if (isset($_SESSION['user'])) {
                     <?php endforeach; ?>
                 </div>
             </div>
-            <div class="col-3"></div>
+            <div class="col-2"></div>
         </div>
     </div>
 </body>
+
 </html>

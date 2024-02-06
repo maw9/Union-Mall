@@ -16,20 +16,22 @@ if (isset($_POST['send-message'])) {
         $pdo->exec($insert_feedback_query);
         header("Location: Index.php");
     } catch (PDOException $pde) {
-        echo $pde->get_message();
+        echo $pde->getMessage();
     }
-} 
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link rel="stylesheet" href="../style/contact_us.css">
 </head>
+
 <body>
     <div class="container">
         <div class="row">
@@ -97,4 +99,5 @@ if (isset($_POST['send-message'])) {
         </div>
     </div>
 </body>
+
 </html>

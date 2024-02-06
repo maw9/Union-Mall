@@ -33,7 +33,7 @@ if (isset($_POST['place-order'])) {
             $order_id = $pdo->lastInsertId();
         }
     } catch (PDOException $pde) {
-        echo $pde->get_message();
+        echo $pde->getMessage();
     }
 
 
@@ -43,11 +43,11 @@ if (isset($_POST['place-order'])) {
     }
     $values = implode(',', $product_inputs);
     $insert_order_product_query = "INSERT INTO $order_product_table (order_id, product_id, quantity) VALUES " . $values;
-    
+
     try {
         $result = $pdo->exec($insert_order_product_query);
     } catch (PDOException $pde) {
-        echo $pde->get_message();
+        echo $pde->getMessage();
     }
 
     $delivery_date = $_POST['delivery-date'];
@@ -57,7 +57,7 @@ if (isset($_POST['place-order'])) {
     try {
         $result = $pdo->exec($insert_delivery_query);
     } catch (PDOException $pde) {
-        echo $pde->get_message();
+        echo $pde->getMessage();
     }
 
     $card_holder = $_POST['card-holder'];
@@ -70,12 +70,11 @@ if (isset($_POST['place-order'])) {
     try {
         $result = $pdo->exec($insert_payment_query);
     } catch (PDOException $pde) {
-        echo $pde->get_message();
+        echo $pde->getMessage();
     }
 
     unset($_SESSION['cart']);
     header("Location: Products.php");
-
 }
 
 
@@ -100,12 +99,12 @@ if (isset($_POST['place-order'])) {
                 <div class="first-container mt-5">
                     <div class="container cart-items">
                         <?php foreach ($cart_items as $item) : ?>
-                        <div class="row mb-3">
-                            <div class="col-9">
-                                <?= $item['qty'] ?>x <?= $item['name'] ?>
+                            <div class="row mb-3">
+                                <div class="col-9">
+                                    <?= $item['qty'] ?>x <?= $item['name'] ?>
+                                </div>
+                                <div class="col-3"><?= $item['qty'] * $item['price'] ?> MMK</div>
                             </div>
-                            <div class="col-3"><?= $item['qty'] * $item['price'] ?> MMK</div>
-                        </div>
                         <?php endforeach ?>
                     </div>
                     <div class="container calculation">
@@ -144,8 +143,7 @@ if (isset($_POST['place-order'])) {
                         </div>
                         <div class="mb-3">
                             <label for="delivery-address" class="form-label">Address</label>
-                            <textarea name="delivery-address" id="delivery-address" class="form-control" rows="3"
-                                placeholder="Enter delivery address" required></textarea>
+                            <textarea name="delivery-address" id="delivery-address" class="form-control" rows="3" placeholder="Enter delivery address" required></textarea>
                         </div>
                     </div>
 
@@ -155,13 +153,11 @@ if (isset($_POST['place-order'])) {
                         <img class="accept-payments" src="../icons/payments.png">
                         <div class="mb-3 mt-4">
                             <label for="card-holder" class="form-label">Card Holder Name</label>
-                            <input type="text" class="form-control" id="card-holder" name="card-holder"
-                                placeholder="Enter card holder name" required>
+                            <input type="text" class="form-control" id="card-holder" name="card-holder" placeholder="Enter card holder name" required>
                         </div>
                         <div class="mb-3">
                             <label for="card-number" class="form-label">Card Number</label>
-                            <input type="number" class="form-control" id="card-number" name="card-number"
-                                placeholder="Enter your card number" required>
+                            <input type="number" class="form-control" id="card-number" name="card-number" placeholder="Enter your card number" required>
                         </div>
                         <div class="mb-3">
                             <label for="expiration-month" class="form-label">Expiration</label>
