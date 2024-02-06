@@ -17,6 +17,7 @@ if (isset($_SESSION['user'])) {
     } catch (PDOException $pde) {
         $pde->get_message();
     }
+
 }
 
 ?>
@@ -42,7 +43,7 @@ if (isset($_SESSION['user'])) {
                         </div>
                     <?php endif; ?>
                     <?php foreach($order_histories as $each): ?>
-                        <div class="row order-item mb-4">
+                        <div class="row order-item mb-4" onClick="window.location.href = 'OrderHistoryDetail.php?order_id=<?= $each['id'] ?>';">
                             <div class="col-1">
                                 <i class="fa-solid fa-dolly"></i>
                             </div>
