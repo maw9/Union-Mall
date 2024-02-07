@@ -128,36 +128,42 @@ if (isset($_POST['add-to-cart'])) {
                     <div class="categories">
                         <h3>Categories</h3>
                         <?php foreach ($categories as $each_cat) : ?>
-                            <div class="form-check">
-                                <input class="form-check-input category_checkbox" type="checkbox" value="<?= $each_cat['id'] ?>" id="<?= "cat_" . $each_cat['id'] ?>" <?= in_array($each_cat['id'], $checked_category_ids) ? "checked" : "" ?> />
-                                <label class="form-check-label" for="<?= "cat_" . $each_cat['id'] ?>">
-                                    <?= $each_cat['name'] ?>
-                                </label>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input category_checkbox" type="checkbox"
+                                value="<?= $each_cat['id'] ?>" id="<?= "cat_" . $each_cat['id'] ?>"
+                                <?= in_array($each_cat['id'], $checked_category_ids) ? "checked" : "" ?> />
+                            <label class="form-check-label" for="<?= "cat_" . $each_cat['id'] ?>">
+                                <?= $each_cat['name'] ?>
+                            </label>
+                        </div>
                         <?php endforeach; ?>
                     </div>
 
                     <div class="sizes mt-4">
                         <h3>Sizes</h3>
                         <?php foreach ($sizes as $each_size) : ?>
-                            <div class="form-check">
-                                <input class="form-check-input size_checkbox" type="checkbox" value="<?= $each_size['id'] ?>" id="<?= "size_" . $each_size['id'] ?>" <?= in_array($each_size['id'], $checked_size_ids) ? "checked" : "" ?> />
-                                <label class="form-check-label" for="<?= "size_" . $each_size['id'] ?>">
-                                    <?= $each_size['name'] ?>
-                                </label>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input size_checkbox" type="checkbox"
+                                value="<?= $each_size['id'] ?>" id="<?= "size_" . $each_size['id'] ?>"
+                                <?= in_array($each_size['id'], $checked_size_ids) ? "checked" : "" ?> />
+                            <label class="form-check-label" for="<?= "size_" . $each_size['id'] ?>">
+                                <?= $each_size['name'] ?>
+                            </label>
+                        </div>
                         <?php endforeach; ?>
                     </div>
 
                     <div class="tags mt-4">
                         <h3>Tags</h3>
                         <?php foreach ($tags as $each_tag) : ?>
-                            <div class="form-check">
-                                <input class="form-check-input tag_checkbox" type="checkbox" value="<?= $each_tag['id'] ?>" id="<?= "tag_" . $each_tag['id'] ?>" <?= in_array($each_tag['id'], $checked_tag_ids) ? "checked" : "" ?> />
-                                <label class="form-check-label" for="<?= "tag_" . $each_tag['id'] ?>">
-                                    <?= $each_tag['name'] ?>
-                                </label>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input tag_checkbox" type="checkbox" value="<?= $each_tag['id'] ?>"
+                                id="<?= "tag_" . $each_tag['id'] ?>"
+                                <?= in_array($each_tag['id'], $checked_tag_ids) ? "checked" : "" ?> />
+                            <label class="form-check-label" for="<?= "tag_" . $each_tag['id'] ?>">
+                                <?= $each_tag['name'] ?>
+                            </label>
+                        </div>
                         <?php endforeach; ?>
                     </div>
 
@@ -170,29 +176,40 @@ if (isset($_POST['add-to-cart'])) {
                 <div class="container">
                     <div class="row row-cols-3">
                         <?php foreach ($products as $each_product) : ?>
-                            <div class="col-4">
-                                <div class="product-card px-3 pb-4">
+                        <div class="col-4">
+                            <div class="product-card px-3 pb-4">
+                                <div onClick="on_product_click(<?= $each_product['id'] ?>)">
                                     <div class="image-and-price">
                                         <img src="<?= "../" . $each_product['image_url'] ?>" />
                                         <span><?= $each_product['price'] . " MMK" ?></span>
                                     </div>
                                     <h4><?= $each_product['name'] ?></h4>
+                                </div>
 
-                                    <div class="cart-action-container">
-                                        <div id="qty-controls-<?= $each_product['id'] ?>" class="qty-controls" style="display: <?= (isset($_SESSION['cart'][$each_product['id']]) && ($_SESSION['cart'][$each_product['id']]['qty'] > 0)) ? "block" : "none" ?>">
-                                            <button class="minus-btn" onClick="on_remove_from_cart(<?= $each_product['id'] ?>)"><i class="fa-solid fa-minus"></i></i></button>
-                                            <span id="qty-product-<?= $each_product['id'] ?>" class="mx-4"><?= $_SESSION['cart'][$each_product['id']]['qty'] ?></span>
-                                            <button id="plus-btn-<?= $each_product['id'] ?>" class="plus-btn" onClick="on_add_to_cart(<?= $each_product['id'] ?>)"><i class="fa-solid fa-plus"></i></button>
-                                        </div>
-
-                                        <button onClick="on_add_to_cart(<?= $each_product['id'] ?>)" class="add-to-cart-btn" id="add-to-cart-<?= $each_product['id'] ?>" <?php if ($each_product['quantity'] <= 0) : echo "disabled";
-                                                                                                                                                                            endif ?> style="display: <?= (!isset($_SESSION['cart'][$each_product['id']]) || ($_SESSION['cart'][$each_product['id']]['qty'] < 1)) ? "block" : "none" ?>">
-                                            Add to Cart
-                                        </button>
-
+                                <div class="cart-action-container">
+                                    <div id="qty-controls-<?= $each_product['id'] ?>" class="qty-controls"
+                                        style="display: <?= (isset($_SESSION['cart'][$each_product['id']]) && ($_SESSION['cart'][$each_product['id']]['qty'] > 0)) ? "block" : "none" ?>">
+                                        <button class="minus-btn"
+                                            onClick="on_remove_from_cart(<?= $each_product['id'] ?>)"><i
+                                                class="fa-solid fa-minus"></i></i></button>
+                                        <span id="qty-product-<?= $each_product['id'] ?>"
+                                            class="mx-4"><?= $_SESSION['cart'][$each_product['id']]['qty'] ?></span>
+                                        <button id="plus-btn-<?= $each_product['id'] ?>" class="plus-btn"
+                                            onClick="on_add_to_cart(<?= $each_product['id'] ?>)"><i
+                                                class="fa-solid fa-plus"></i></button>
                                     </div>
+
+                                    <button onClick="on_add_to_cart(<?= $each_product['id'] ?>)" class="add-to-cart-btn"
+                                        id="add-to-cart-<?= $each_product['id'] ?>"
+                                        <?php if ($each_product['quantity'] <= 0) : echo "disabled";
+                                                                                                                                                                            endif ?>
+                                        style="display: <?= (!isset($_SESSION['cart'][$each_product['id']]) || ($_SESSION['cart'][$each_product['id']]['qty'] < 1)) ? "block" : "none" ?>">
+                                        Add to Cart
+                                    </button>
+
                                 </div>
                             </div>
+                        </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -200,97 +217,101 @@ if (isset($_POST['add-to-cart'])) {
         </div>
     </div>
     <script>
-        var cat_ids_query_param_list = [];
-        var size_ids_query_param_list = [];
-        var tag_ids_query_param_list = [];
+    var cat_ids_query_param_list = [];
+    var size_ids_query_param_list = [];
+    var tag_ids_query_param_list = [];
 
-        const categoryCheckboxes = Array.from(document.querySelectorAll('.category_checkbox'));
-        const sizeCheckboxes = Array.from(document.querySelectorAll('.size_checkbox'));
-        const tagCheckboxes = Array.from(document.querySelectorAll('.tag_checkbox'));
-        const checkboxes = categoryCheckboxes.concat(sizeCheckboxes, tagCheckboxes);
+    const categoryCheckboxes = Array.from(document.querySelectorAll('.category_checkbox'));
+    const sizeCheckboxes = Array.from(document.querySelectorAll('.size_checkbox'));
+    const tagCheckboxes = Array.from(document.querySelectorAll('.tag_checkbox'));
+    const checkboxes = categoryCheckboxes.concat(sizeCheckboxes, tagCheckboxes);
 
-        checkboxes.forEach((each) => {
-            each.addEventListener("change", () => {
-                var count = 0;
-                cat_ids_query_param_list = getCheckedIds(categoryCheckboxes).map(
-                    (eachCat) => "category_ids[" + count++ + "]=" + eachCat
-                );
+    checkboxes.forEach((each) => {
+        each.addEventListener("change", () => {
+            var count = 0;
+            cat_ids_query_param_list = getCheckedIds(categoryCheckboxes).map(
+                (eachCat) => "category_ids[" + count++ + "]=" + eachCat
+            );
 
-                count = 0;
-                size_ids_query_param_list = getCheckedIds(sizeCheckboxes).map(
-                    (eachSize) => "size_ids[" + count++ + "]=" + eachSize
-                );
+            count = 0;
+            size_ids_query_param_list = getCheckedIds(sizeCheckboxes).map(
+                (eachSize) => "size_ids[" + count++ + "]=" + eachSize
+            );
 
-                count = 0;
-                tag_ids_query_param_list = getCheckedIds(tagCheckboxes).map(
-                    (eachTag) => "tag_ids[" + count++ + "]=" + eachTag
-                );
-                window.location.href = 'Products.php?' + cat_ids_query_param_list.join('&') + "&" +
-                    size_ids_query_param_list.join('&') + "&" + tag_ids_query_param_list.join('&');
-            });
+            count = 0;
+            tag_ids_query_param_list = getCheckedIds(tagCheckboxes).map(
+                (eachTag) => "tag_ids[" + count++ + "]=" + eachTag
+            );
+            window.location.href = 'Products.php?' + cat_ids_query_param_list.join('&') + "&" +
+                size_ids_query_param_list.join('&') + "&" + tag_ids_query_param_list.join('&');
         });
+    });
 
-        function getCheckedIds(checkboxes) {
-            var checkedIds = [];
-            checkboxes.forEach((each) => {
-                if (each.checked) {
-                    checkedIds.push(each.value);
-                }
+    function getCheckedIds(checkboxes) {
+        var checkedIds = [];
+        checkboxes.forEach((each) => {
+            if (each.checked) {
+                checkedIds.push(each.value);
+            }
+        });
+        return checkedIds;
+    }
+
+    function on_add_to_cart(item_id) {
+        const request = new Request(`AddToCartSession.php?product_id=${item_id}`)
+        fetch(request)
+            .then((response) => response.json())
+            .then((result) => {
+                const cart_item_qty = document.querySelector(".badge");
+                cart_item_qty.textContent = result.cart_total_qty;
+
+                const add_to_cart_btn = document.querySelector(`#add-to-cart-${item_id}`);
+                add_to_cart_btn.style.display = 'none';
+
+                const qty_controls = document.querySelector(`#qty-controls-${item_id}`);
+                qty_controls.style.display = 'block';
+
+                const plus_btn = document.querySelector(`#plus-btn-${item_id}`);
+                plus_btn.disabled = !result.is_enable_to_add_more;
+
+                const badge_circle = document.querySelector(".badge");
+                badge_circle.style.display = 'block';
+
+                const specific_product_qty = document.querySelector(`#qty-product-${item_id}`);
+                specific_product_qty.textContent = result.product_qty;
             });
-            return checkedIds;
-        }
+    }
 
-        function on_add_to_cart(item_id) {
-            const request = new Request(`AddToCartSession.php?product_id=${item_id}`)
-            fetch(request)
-                .then((response) => response.json())
-                .then((result) => {
-                    const cart_item_qty = document.querySelector(".badge");
-                    cart_item_qty.textContent = result.cart_total_qty;
+    function on_remove_from_cart(item_id) {
+        const request = new Request(`RemoveFromCartSession.php?product_id=${item_id}`)
+        fetch(request)
+            .then((response) => response.json())
+            .then((result) => {
+                const cart_item_qty = document.querySelector(".badge");
+                cart_item_qty.textContent = result.cart_total_qty;
 
+                if (result.product_qty == 0) {
                     const add_to_cart_btn = document.querySelector(`#add-to-cart-${item_id}`);
-                    add_to_cart_btn.style.display = 'none';
+                    add_to_cart_btn.style.display = 'block';
 
                     const qty_controls = document.querySelector(`#qty-controls-${item_id}`);
-                    qty_controls.style.display = 'block';
-
-                    const plus_btn = document.querySelector(`#plus-btn-${item_id}`);
-                    plus_btn.disabled = !result.is_enable_to_add_more;
+                    qty_controls.style.display = 'none';
 
                     const badge_circle = document.querySelector(".badge");
-                    badge_circle.style.display = 'block';
+                    badge_circle.style.display = 'none';
+                }
 
-                    const specific_product_qty = document.querySelector(`#qty-product-${item_id}`);
-                    specific_product_qty.textContent = result.product_qty;
-                });
-        }
+                const plus_btn = document.querySelector(`#plus-btn-${item_id}`);
+                plus_btn.disabled = !result.is_enable_to_add_more;
 
-        function on_remove_from_cart(item_id) {
-            const request = new Request(`RemoveFromCartSession.php?product_id=${item_id}`)
-            fetch(request)
-                .then((response) => response.json())
-                .then((result) => {
-                    const cart_item_qty = document.querySelector(".badge");
-                    cart_item_qty.textContent = result.cart_total_qty;
+                const specific_product_qty = document.querySelector(`#qty-product-${item_id}`);
+                specific_product_qty.textContent = result.product_qty;
+            });
+    }
 
-                    if (result.product_qty == 0) {
-                        const add_to_cart_btn = document.querySelector(`#add-to-cart-${item_id}`);
-                        add_to_cart_btn.style.display = 'block';
-
-                        const qty_controls = document.querySelector(`#qty-controls-${item_id}`);
-                        qty_controls.style.display = 'none';
-
-                        const badge_circle = document.querySelector(".badge");
-                        badge_circle.style.display = 'none';
-                    }
-
-                    const plus_btn = document.querySelector(`#plus-btn-${item_id}`);
-                    plus_btn.disabled = !result.is_enable_to_add_more;
-
-                    const specific_product_qty = document.querySelector(`#qty-product-${item_id}`);
-                    specific_product_qty.textContent = result.product_qty;
-                });
-        }
+    function on_product_click(product_id) {
+        window.location.href = `ProductDetail.php?product_id=${product_id}`;
+    }
     </script>
 </body>
 
