@@ -21,10 +21,10 @@ require_once('../style/Head.php');
                     <h3>Union Mall</h3>
                     <div class="divider mb-3"></div>
                     <div class="nav-item">
-                        <a class=""><i class="fa-solid fa-chart-line"></i>Dashboard</a>
+                        <a href="Dashboard.php"><i class="fa-solid fa-chart-line"></i>Dashboard</a>
                     </div>
                     <div class="nav-item">
-                        <a class=""><i class="fa-solid fa-shirt"></i></i>Products</a>
+                        <a href="product/ViewProducts.php"><i class="fa-solid fa-shirt"></i></i>Products</a>
                     </div>
                     <div class="nav-item">
                         <a class=""><i class="fa-solid fa-icons"></i>Categories</a>
@@ -33,16 +33,16 @@ require_once('../style/Head.php');
                         <a class=""><i class="fa-solid fa-maximize"></i>Sizes</a>
                     </div>
                     <div class="nav-item">
-                        <a class=""><i class="fa-solid fa-tags"></i></i>Tags</a>
+                        <a class=""><i class="fa-solid fa-tags"></i>Tags</a>
                     </div>
                     <div class="nav-item">
-                        <a class=""><i class="fa-solid fa-users"></i></i>Users</a>
+                        <a class=""><i class="fa-solid fa-users"></i>Users</a>
                     </div>
                     <div class="nav-item">
                         <a class=""><i class="fa-solid fa-list-check"></i>Orders</a>
                     </div>
                     <div class="nav-item">
-                        <a class=""><i class="fa-solid fa-bell"></i></i>Notifications</a>
+                        <a class=""><i class="fa-solid fa-bell"></i>Notifications</a>
                     </div>
                     <div class="divider mt-3"></div>
                     <div id="account-section">
@@ -57,9 +57,9 @@ require_once('../style/Head.php');
                 </div>
             </div>
             <div class="col-10 ps-3">
-                <h2>Dashboard</h2>
                 <div class="container">
-                    <div class="row mt-5">
+                    <h2>Dashboard</h2>
+                    <div class="row mt-4">
                         <div class="col-3">
                             <div class="card-container">
                                 <div class="total-card">
@@ -82,15 +82,15 @@ require_once('../style/Head.php');
                                 <div class="total-card">
                                     <div>
                                         <div class="label">
-                                            Total Products
+                                            Total Categories
                                         </div>
                                         <div class="count">
-                                            100
+                                            200
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-icon">
-                                    <i class="fa-solid fa-shirt"></i>
+                                    <i class="fa-solid fa-icons"></i>
                                 </div>
                             </div>
                         </div>
@@ -99,12 +99,15 @@ require_once('../style/Head.php');
                                 <div class="total-card">
                                     <div>
                                         <div class="label">
-                                            Total Products
+                                            Total Sizes
                                         </div>
                                         <div class="count">
-                                            100
+                                            25
                                         </div>
                                     </div>
+                                </div>
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-maximize"></i>
                                 </div>
                             </div>
                         </div>
@@ -113,18 +116,71 @@ require_once('../style/Head.php');
                                 <div class="total-card">
                                     <div>
                                         <div class="label">
-                                            Total Products
+                                            Total Tags
                                         </div>
                                         <div class="count">
-                                            100
+                                            60
                                         </div>
                                     </div>
                                 </div>
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-tags"></i>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-3"></div>
-                        <div class="col-3"></div>
-                        <div class="col-3"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <div class="card-container">
+                                <div class="total-card">
+                                    <div>
+                                        <div class="label">
+                                            Total Users
+                                        </div>
+                                        <div class="count">
+                                            60
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card-container">
+                                <div class="total-card">
+                                    <div>
+                                        <div class="label">
+                                            Total Orders
+                                        </div>
+                                        <div class="count">
+                                            60
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-list-check"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card-container">
+                                <div class="total-card">
+                                    <div>
+                                        <div class="label">
+                                            Total Notifications
+                                        </div>
+                                        <div class="count">
+                                            60
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-bell"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
