@@ -3,11 +3,15 @@ include_once("../../database/Connect.php");
 include_once("../../style/Head.php");
 include_once("../../database/TableNames.php");
 
-$fetch_categories = "SELECT * FROM $category_table";
+$fetch_orders = "SELECT $delivery_table., $category_table.name as 'category', $size_table.name as 'size', $tag_table.name as tag FROM $product_table 
+    LEFT JOIN $category_table ON $product_table.category_id = $category_table.id
+    LEFT JOIN $size_table ON $product_table.size_id = $size_table.id
+    RIGHT JOIN $product_tag_table ON $product_table.id = $product_tag_table.product_id
+    LEFT JOIN $tag_table ON $product_tag_table.tag_id = $tag_table.id;";
 
 try {
-    $stmt = $pdo->query($fetch_categories);
-    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->query($fetch_sizes);
+    $sizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $pde) {
     echo $pde->getMessage();
 }
@@ -31,9 +35,8 @@ if (isset($_POST['delete'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
+    <title>Orders</title>
     <link rel="stylesheet" href="../../style/dashboard.css">
-
 </head>
 
 <body>
@@ -50,10 +53,10 @@ if (isset($_POST['delete'])) {
                         <a href="../product/ViewProducts.php"><i class="fa-solid fa-shirt"></i></i>Products</a>
                     </div>
                     <div class="nav-item">
-                        <a href="ViewCategories.php"><i class="fa-solid fa-icons"></i>Categories</a>
+                        <a href="../category/ViewCategories.php"><i class="fa-solid fa-icons"></i>Categories</a>
                     </div>
                     <div class="nav-item">
-                        <a href="../size/ViewSizes.php"><i class="fa-solid fa-maximize"></i>Sizes</a>
+                        <a href="ViewSizes.php"><i class="fa-solid fa-maximize"></i>Sizes</a>
                     </div>
                     <div class="nav-item">
                         <a href="../tag/ViewTags.php"><i class="fa-solid fa-tags"></i>Tags</a>
@@ -62,7 +65,7 @@ if (isset($_POST['delete'])) {
                         <a href="../user/ViewUsers.php"><i class="fa-solid fa-users"></i>Users</a>
                     </div>
                     <div class="nav-item">
-                        <a href=""><i class="fa-solid fa-list-check"></i>Orders</a>
+                        <a href="ViewOrders.php"><i class="fa-solid fa-list-check"></i>Orders</a>
                     </div>
                     <div class="nav-item">
                         <a href=""><i class="fa-solid fa-bell"></i>Notifications</a>
@@ -93,7 +96,7 @@ if (isset($_POST['delete'])) {
                                 </thead>
 
                                 <tbody>
-                                    <?php foreach ($categories as $each) : ?>
+                                    <?php foreach ($sizes as $each) : ?>
                                     <tr>
                                         <td><?= $each['id'] ?></td>
                                         <td><?= $each['name'] ?></td>

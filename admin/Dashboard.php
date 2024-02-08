@@ -27,31 +27,31 @@ require_once('../style/Head.php');
                         <a href="product/ViewProducts.php"><i class="fa-solid fa-shirt"></i></i>Products</a>
                     </div>
                     <div class="nav-item">
-                        <a class=""><i class="fa-solid fa-icons"></i>Categories</a>
+                        <a href="category/ViewCategories.php"><i class="fa-solid fa-icons"></i>Categories</a>
                     </div>
                     <div class="nav-item">
-                        <a class=""><i class="fa-solid fa-maximize"></i>Sizes</a>
+                        <a href="size/ViewSizes.php"><i class="fa-solid fa-maximize"></i>Sizes</a>
                     </div>
                     <div class="nav-item">
-                        <a class=""><i class="fa-solid fa-tags"></i>Tags</a>
+                        <a href="tag/ViewTags.php"><i class="fa-solid fa-tags"></i>Tags</a>
                     </div>
                     <div class="nav-item">
-                        <a class=""><i class="fa-solid fa-users"></i>Users</a>
+                        <a href="user/ViewUsers.php"><i class="fa-solid fa-users"></i>Users</a>
                     </div>
                     <div class="nav-item">
-                        <a class=""><i class="fa-solid fa-list-check"></i>Orders</a>
+                        <a href=""><i class="fa-solid fa-list-check"></i>Orders</a>
                     </div>
                     <div class="nav-item">
-                        <a class=""><i class="fa-solid fa-bell"></i>Notifications</a>
+                        <a href=""><i class="fa-solid fa-bell"></i>Notifications</a>
                     </div>
                     <div class="divider mt-3"></div>
                     <div id="account-section">
                         <h4>Account</h4>
                         <div class="nav-item">
-                            <a class=""><i class="fa-solid fa-user"></i>Profile</a>
+                            <a href=""><i class="fa-solid fa-user"></i>Profile</a>
                         </div>
                         <div class="nav-item">
-                            <a class=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                            <a href=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                         </div>
                     </div>
                 </div>

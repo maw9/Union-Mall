@@ -3,11 +3,11 @@ include_once("../../database/Connect.php");
 include_once("../../style/Head.php");
 include_once("../../database/TableNames.php");
 
-$fetch_categories = "SELECT * FROM $category_table";
+$fetch_tags = "SELECT * FROM $tag_table";
 
 try {
-    $stmt = $pdo->query($fetch_categories);
-    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->query($fetch_tags);
+    $tags = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $pde) {
     echo $pde->getMessage();
 }
@@ -31,9 +31,8 @@ if (isset($_POST['delete'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
+    <title>Tags</title>
     <link rel="stylesheet" href="../../style/dashboard.css">
-
 </head>
 
 <body>
@@ -50,13 +49,13 @@ if (isset($_POST['delete'])) {
                         <a href="../product/ViewProducts.php"><i class="fa-solid fa-shirt"></i></i>Products</a>
                     </div>
                     <div class="nav-item">
-                        <a href="ViewCategories.php"><i class="fa-solid fa-icons"></i>Categories</a>
+                        <a href="../category/ViewCategories.php"><i class="fa-solid fa-icons"></i>Categories</a>
                     </div>
                     <div class="nav-item">
                         <a href="../size/ViewSizes.php"><i class="fa-solid fa-maximize"></i>Sizes</a>
                     </div>
                     <div class="nav-item">
-                        <a href="../tag/ViewTags.php"><i class="fa-solid fa-tags"></i>Tags</a>
+                        <a href="ViewTags.php"><i class="fa-solid fa-tags"></i>Tags</a>
                     </div>
                     <div class="nav-item">
                         <a href="../user/ViewUsers.php"><i class="fa-solid fa-users"></i>Users</a>
@@ -93,7 +92,7 @@ if (isset($_POST['delete'])) {
                                 </thead>
 
                                 <tbody>
-                                    <?php foreach ($categories as $each) : ?>
+                                    <?php foreach ($tags as $each) : ?>
                                     <tr>
                                         <td><?= $each['id'] ?></td>
                                         <td><?= $each['name'] ?></td>

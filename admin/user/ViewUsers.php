@@ -3,11 +3,11 @@ include_once("../../database/Connect.php");
 include_once("../../style/Head.php");
 include_once("../../database/TableNames.php");
 
-$fetch_categories = "SELECT * FROM $category_table";
+$fetch_users = "SELECT * FROM $user_table";
 
 try {
-    $stmt = $pdo->query($fetch_categories);
-    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->query($fetch_users);
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $pde) {
     echo $pde->getMessage();
 }
@@ -31,9 +31,9 @@ if (isset($_POST['delete'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
+    <title>Users</title>
     <link rel="stylesheet" href="../../style/dashboard.css">
-
+    <link rel="stylesheet" href="../../style/view_users.css">
 </head>
 
 <body>
@@ -50,16 +50,16 @@ if (isset($_POST['delete'])) {
                         <a href="../product/ViewProducts.php"><i class="fa-solid fa-shirt"></i></i>Products</a>
                     </div>
                     <div class="nav-item">
-                        <a href="ViewCategories.php"><i class="fa-solid fa-icons"></i>Categories</a>
+                        <a href="../category/ViewCategories.php"><i class="fa-solid fa-icons"></i>Categories</a>
                     </div>
                     <div class="nav-item">
-                        <a href="../size/ViewSizes.php"><i class="fa-solid fa-maximize"></i>Sizes</a>
+                        <a href="ViewSizes.php"><i class="fa-solid fa-maximize"></i>Sizes</a>
                     </div>
                     <div class="nav-item">
                         <a href="../tag/ViewTags.php"><i class="fa-solid fa-tags"></i>Tags</a>
                     </div>
                     <div class="nav-item">
-                        <a href="../user/ViewUsers.php"><i class="fa-solid fa-users"></i>Users</a>
+                        <a href="ViewUsers.php"><i class="fa-solid fa-users"></i>Users</a>
                     </div>
                     <div class="nav-item">
                         <a href=""><i class="fa-solid fa-list-check"></i>Orders</a>
@@ -87,16 +87,27 @@ if (isset($_POST['delete'])) {
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Image</th>
                                         <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                        <th>User Type</th>
                                         <th>Enabled Actions</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <?php foreach ($categories as $each) : ?>
+                                    <?php foreach ($users as $each) : ?>
                                     <tr>
                                         <td><?= $each['id'] ?></td>
+                                        <td>
+                                            <img
+                                                src="../../<?= empty($each['profile_url']) ? 'images/avatar.png' : $each['profile_url']?>">
+                                        </td>
                                         <td><?= $each['name'] ?></td>
+                                        <td><?= $each['email'] ?></td>
+                                        <td><?= $each['address'] ?></td>
+                                        <td><?= ($each['is_admin'] == 1) ? "Admin" : "Customer" ?></td>
                                         <td>
                                             <form method="post">
                                                 <input type="text" hidden name="id" value="<?= $each['id'] ?>">
