@@ -1,0 +1,135 @@
+<?php
+require_once('../style/Head.php');
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../style/dashboard.css">
+</head>
+
+<body>
+    <div class="container-fluid px-4">
+        <div class="row dashboard py-3">
+            <div class="col-2 p-0">
+                <div class="side-nav">
+                    <h3>Union Mall</h3>
+                    <div class="divider mb-3"></div>
+                    <div class="nav-item">
+                        <a class=""><i class="fa-solid fa-chart-line"></i>Dashboard</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class=""><i class="fa-solid fa-shirt"></i></i>Products</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class=""><i class="fa-solid fa-icons"></i>Categories</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class=""><i class="fa-solid fa-maximize"></i>Sizes</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class=""><i class="fa-solid fa-tags"></i></i>Tags</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class=""><i class="fa-solid fa-users"></i></i>Users</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class=""><i class="fa-solid fa-list-check"></i>Orders</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class=""><i class="fa-solid fa-bell"></i></i>Notifications</a>
+                    </div>
+                    <div class="divider mt-3"></div>
+                    <div id="account-section">
+                        <h4>Account</h4>
+                        <div class="nav-item">
+                            <a class=""><i class="fa-solid fa-user"></i>Profile</a>
+                        </div>
+                        <div class="nav-item">
+                            <a class=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 ps-3">
+                <h2>Dashboard</h2>
+                <div class="container">
+                    <div class="row mt-5">
+                        <div class="col-3">
+                            <div class="card-container">
+                                <div class="total-card">
+                                    <div>
+                                        <div class="label">
+                                            Total Products
+                                        </div>
+                                        <div class="count">
+                                            100
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-shirt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-container">
+                                <div class="total-card">
+                                    <div>
+                                        <div class="label">
+                                            Total Products
+                                        </div>
+                                        <div class="count">
+                                            100
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-shirt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-container">
+                                <div class="total-card">
+                                    <div>
+                                        <div class="label">
+                                            Total Products
+                                        </div>
+                                        <div class="count">
+                                            100
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card-container">
+                                <div class="total-card">
+                                    <div>
+                                        <div class="label">
+                                            Total Products
+                                        </div>
+                                        <div class="count">
+                                            100
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3"></div>
+                        <div class="col-3"></div>
+                        <div class="col-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
