@@ -62,10 +62,10 @@ if (isset($_POST['delete'])) {
                         <a href="ViewUsers.php"><i class="fa-solid fa-users"></i>Users</a>
                     </div>
                     <div class="nav-item">
-                        <a href=""><i class="fa-solid fa-list-check"></i>Orders</a>
+                        <a href="../order/ViewOrders.php"><i class="fa-solid fa-list-check"></i>Orders</a>
                     </div>
                     <div class="nav-item">
-                        <a href=""><i class="fa-solid fa-bell"></i>Notifications</a>
+                        <a href="../notification/ViewFeedbacks.php"><i class="fa-solid fa-bell"></i>Notifications</a>
                     </div>
                     <div class="divider mt-3"></div>
                     <div id="account-section">
@@ -98,26 +98,23 @@ if (isset($_POST['delete'])) {
 
                                 <tbody>
                                     <?php foreach ($users as $each) : ?>
-                                    <tr>
-                                        <td><?= $each['id'] ?></td>
-                                        <td>
-                                            <img
-                                                src="../../<?= empty($each['profile_url']) ? 'images/avatar.png' : $each['profile_url']?>">
-                                        </td>
-                                        <td><?= $each['name'] ?></td>
-                                        <td><?= $each['email'] ?></td>
-                                        <td><?= $each['address'] ?></td>
-                                        <td><?= ($each['is_admin'] == 1) ? "Admin" : "Customer" ?></td>
-                                        <td>
-                                            <form method="post">
-                                                <input type="text" hidden name="id" value="<?= $each['id'] ?>">
-                                                <button class="btn btn-primary btn-sm" name="edit"><i
-                                                        class="fa-regular fa-pen-to-square"></i></button>
-                                                <button class="btn btn-danger btn-sm" name="delete"><i
-                                                        class="fa-solid fa-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td><?= $each['id'] ?></td>
+                                            <td>
+                                                <img src="../../<?= empty($each['profile_url']) ? 'images/avatar.png' : $each['profile_url'] ?>">
+                                            </td>
+                                            <td><?= $each['name'] ?></td>
+                                            <td><?= $each['email'] ?></td>
+                                            <td><?= $each['address'] ?></td>
+                                            <td><?= ($each['is_admin'] == 1) ? "Admin" : "Customer" ?></td>
+                                            <td>
+                                                <form method="post">
+                                                    <input type="text" hidden name="id" value="<?= $each['id'] ?>">
+                                                    <button class="btn btn-primary btn-sm" name="edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                                                    <button class="btn btn-danger btn-sm" name="delete"><i class="fa-solid fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>

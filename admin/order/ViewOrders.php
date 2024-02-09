@@ -3,15 +3,14 @@ include_once("../../database/Connect.php");
 include_once("../../style/Head.php");
 include_once("../../database/TableNames.php");
 
-$fetch_orders = "SELECT $delivery_table., $category_table.name as 'category', $size_table.name as 'size', $tag_table.name as tag FROM $product_table 
-    LEFT JOIN $category_table ON $product_table.category_id = $category_table.id
-    LEFT JOIN $size_table ON $product_table.size_id = $size_table.id
-    RIGHT JOIN $product_tag_table ON $product_table.id = $product_tag_table.product_id
-    LEFT JOIN $tag_table ON $product_tag_table.tag_id = $tag_table.id;";
+$fetch_orders = "SELECT $order_table.id, $order_table.created_at, $order_table.total_amount,
+    $delivery_table.address, $delivery_table.date_to_deliver, $user_table.id as customer_id, $user_table.name
+    FROM $order_table RIGHT JOIN $delivery_table ON $order_table.id = $delivery_table.order_id
+    LEFT JOIN $user_table ON $user_table.id = $order_table.user_id;";
 
 try {
-    $stmt = $pdo->query($fetch_sizes);
-    $sizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->query($fetch_orders);
+    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $pde) {
     echo $pde->getMessage();
 }
@@ -56,7 +55,7 @@ if (isset($_POST['delete'])) {
                         <a href="../category/ViewCategories.php"><i class="fa-solid fa-icons"></i>Categories</a>
                     </div>
                     <div class="nav-item">
-                        <a href="ViewSizes.php"><i class="fa-solid fa-maximize"></i>Sizes</a>
+                        <a href="../size/ViewSizes.php"><i class="fa-solid fa-maximize"></i>Sizes</a>
                     </div>
                     <div class="nav-item">
                         <a href="../tag/ViewTags.php"><i class="fa-solid fa-tags"></i>Tags</a>
@@ -68,7 +67,7 @@ if (isset($_POST['delete'])) {
                         <a href="ViewOrders.php"><i class="fa-solid fa-list-check"></i>Orders</a>
                     </div>
                     <div class="nav-item">
-                        <a href=""><i class="fa-solid fa-bell"></i>Notifications</a>
+                        <a href="../notification/ViewFeedbacks.php"><i class="fa-solid fa-bell"></i>Notifications</a>
                     </div>
                     <div class="divider mt-3"></div>
                     <div id="account-section">
@@ -89,27 +88,35 @@ if (isset($_POST['delete'])) {
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
+                                        <th>Order ID</th>
+                                        <th>Created At</th>
+                                        <th>Total Amount</th>
+                                        <th>Delivery Address</th>
+                                        <th>Delivery Date</th>
+                                        <th>Customer ID</th>
+                                        <th>Customer Name</th>
                                         <th>Enabled Actions</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <?php foreach ($sizes as $each) : ?>
-                                    <tr>
-                                        <td><?= $each['id'] ?></td>
-                                        <td><?= $each['name'] ?></td>
-                                        <td>
-                                            <form method="post">
-                                                <input type="text" hidden name="id" value="<?= $each['id'] ?>">
-                                                <button class="btn btn-primary btn-sm" name="edit"><i
-                                                        class="fa-regular fa-pen-to-square"></i></button>
-                                                <button class="btn btn-danger btn-sm" name="delete"><i
-                                                        class="fa-solid fa-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                    <?php foreach ($orders as $each) : ?>
+                                        <tr>
+                                            <td><?= $each['id'] ?></td>
+                                            <td><?= $each['created_at'] ?></td>
+                                            <td><?= $each['total_amount'] ?></td>
+                                            <td><?= $each['address'] ?></td>
+                                            <td><?= $each['date_to_deliver'] ?></td>
+                                            <td><?= $each['customer_id'] ?></td>
+                                            <td><?= $each['name'] ?></td>
+                                            <td>
+                                                <form method="post">
+                                                    <input type="text" hidden name="id" value="<?= $each['id'] ?>">
+                                                    <button class="btn btn-primary btn-sm" name="edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                                                    <button class="btn btn-danger btn-sm" name="delete"><i class="fa-solid fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>

@@ -3,11 +3,11 @@ include_once("../../database/Connect.php");
 include_once("../../style/Head.php");
 include_once("../../database/TableNames.php");
 
-$fetch_categories = "SELECT * FROM $category_table";
+$fetch_feedbacks = "SELECT * FROM $feedback_table";
 
 try {
-    $stmt = $pdo->query($fetch_categories);
-    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->query($fetch_feedbacks);
+    $feedbacks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $pde) {
     echo $pde->getMessage();
 }
@@ -31,9 +31,9 @@ if (isset($_POST['delete'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
+    <title>Notifications</title>
     <link rel="stylesheet" href="../../style/dashboard.css">
-
+    <link rel="stylesheet" href="../../style/view_users.css">
 </head>
 
 <body>
@@ -50,7 +50,7 @@ if (isset($_POST['delete'])) {
                         <a href="../product/ViewProducts.php"><i class="fa-solid fa-shirt"></i></i>Products</a>
                     </div>
                     <div class="nav-item">
-                        <a href="ViewCategories.php"><i class="fa-solid fa-icons"></i>Categories</a>
+                        <a href="../category/ViewCategories.php"><i class="fa-solid fa-icons"></i>Categories</a>
                     </div>
                     <div class="nav-item">
                         <a href="../size/ViewSizes.php"><i class="fa-solid fa-maximize"></i>Sizes</a>
@@ -65,7 +65,7 @@ if (isset($_POST['delete'])) {
                         <a href="../order/ViewOrders.php"><i class="fa-solid fa-list-check"></i>Orders</a>
                     </div>
                     <div class="nav-item">
-                        <a href="../notification/ViewFeedbacks.php"><i class="fa-solid fa-bell"></i>Notifications</a>
+                        <a href="ViewFeedbacks.php"><i class="fa-solid fa-bell"></i>Notifications</a>
                     </div>
                     <div class="divider mt-3"></div>
                     <div id="account-section">
@@ -88,15 +88,21 @@ if (isset($_POST['delete'])) {
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Subject</th>
+                                        <th>Message</th>
                                         <th>Enabled Actions</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <?php foreach ($categories as $each) : ?>
+                                    <?php foreach ($feedbacks as $each) : ?>
                                         <tr>
                                             <td><?= $each['id'] ?></td>
                                             <td><?= $each['name'] ?></td>
+                                            <td><?= $each['email'] ?></td>
+                                            <td><?= $each['subject'] ?></td>
+                                            <td><?= $each['message'] ?></td>
                                             <td>
                                                 <form method="post">
                                                     <input type="text" hidden name="id" value="<?= $each['id'] ?>">
