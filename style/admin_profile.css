@@ -1,0 +1,64 @@
+* {
+    font-family: 'Maven Pro', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-nav h1 {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.profile-nav button {
+    width: 180px;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    margin: 32px;
+}
+
+#logout {
+    right: 0;
+}
+
+.main {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-container {
+    display: flex;
+    margin: 0 auto;
+    box-shadow: 0px 5px 10px lightgray;
+    border-radius: 16px;
+    padding: 48px;
+}
+
+.profile-container img {
+    width: 350px;
+    height: 350px;
+    border-radius: 4%;
+    margin-right: 80px;
+    object-fit: cover;
+}
+
+.user-info label {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.profile-container button {
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    padding: 20px 32px;
+}
+
+.profile-container button:hover {
+    background-color: white;
+    color: black;
+    padding: 20px 32px;
+}

@@ -1,7 +1,12 @@
 <?php
+session_start();
 include_once("../database/Connect.php");
 include_once("../style/Head.php");
 include_once("../database/TableNames.php");
+
+if (!isset($_SESSION['user'])) {
+    header('Location: ../auth/Login.php');
+}
 
 $fetch_total_products = "SELECT SUM(quantity) as total FROM $product_table";
 try {
@@ -107,7 +112,7 @@ try {
                     <div id="account-section">
                         <h4>Account</h4>
                         <div class="nav-item">
-                            <a href=""><i class="fa-solid fa-user"></i>Profile</a>
+                            <a href="profile/Profile.php"><i class="fa-solid fa-user"></i>Profile</a>
                         </div>
                         <div class="nav-item">
                             <a href=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a>

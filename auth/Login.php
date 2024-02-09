@@ -26,7 +26,12 @@ if (isset($_POST['login'])) {
                 $is_email_error_visible = false;
                 $is_password_error_visible = false;
                 saveUserSession($user);
-                header('Location: ../user/');
+
+                if ($user['is_admin'] == 1) {
+                    header('Location: ../admin/Dashboard.php');
+                } else {
+                    header('Location: ../user/');
+                }
             }
         }
     } catch (PDOException $pde) {
@@ -78,10 +83,12 @@ function saveUserSession($user)
         <span>Don't have an account?</span>
         <a href="Register.php">Create one</a>
     </div>
-    <div class="alert alert-danger email-error-alert" role="alert" style="display: <?= $is_email_error_visible ? "visible" : "none" ?>;">
+    <div class="alert alert-danger email-error-alert" role="alert"
+        style="display: <?= $is_email_error_visible ? "visible" : "none" ?>;">
         E-mail is not registered!
     </div>
-    <div class="alert alert-danger password-error-alert" role="alert" style="display: <?= $is_password_error_visible ? "visible" : "none" ?>;">
+    <div class="alert alert-danger password-error-alert" role="alert"
+        style="display: <?= $is_password_error_visible ? "visible" : "none" ?>;">
         Password is incorrect!
     </div>
 </body>
