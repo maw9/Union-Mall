@@ -3,7 +3,7 @@ include_once("../database/Connect.php");
 include_once("../style/Head.php");
 include_once("../database/TableNames.php");
 
-$fetch_total_products = "SELECT COUNT(*) as total FROM $product_table";
+$fetch_total_products = "SELECT SUM(quantity) as total FROM $product_table";
 try {
     $stmt = $pdo->query($fetch_total_products);
     $total_products = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -124,7 +124,7 @@ try {
                                 <div class="total-card">
                                     <div>
                                         <div class="label">
-                                            Total Products
+                                            Total Stocks
                                         </div>
                                         <div class="count">
                                             <?= $total_products['total'] ?>
@@ -254,50 +254,50 @@ try {
     </div>
 
     <script type="text/javascript">
-        // Load the Visualization API and the corechart package.
-        google.charts.load('current', {
-            'packages': ['corechart']
-        });
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
 
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(drawChart);
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
 
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
-        function drawChart() {
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
 
-            const request = new Request(`FetchProductsCountByCategorySession.php`);
-            fetch(request)
-                .then((response) => response.json())
-                .then((result) => {
-                    console.log(result);
+        const request = new Request(`FetchProductsCountByCategorySession.php`);
+        fetch(request)
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result);
 
-                    // Create the data table.
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'Categories');
-                    data.addColumn('number', 'Total Products');
+                // Create the data table.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Categories');
+                data.addColumn('number', 'Total Products');
 
-                    let chart_data = [];
-                    for (let i = 0; i < result.categories.length; i++) {
-                        chart_data[i] = [result.categories[i], Number(result.total_products_per_cat[i])];
-                    }
+                let chart_data = [];
+                for (let i = 0; i < result.categories.length; i++) {
+                    chart_data[i] = [result.categories[i], Number(result.total_products_per_cat[i])];
+                }
 
-                    console.log(chart_data);
+                console.log(chart_data);
 
-                    data.addRows(chart_data);
+                data.addRows(chart_data);
 
-                    // Set chart options
-                    var options = {
-                        'title': 'Total Products Per Category',
-                        'is3D': true,
-                    };
+                // Set chart options
+                var options = {
+                    'title': 'Total Product Stocks Per Category',
+                    'is3D': true,
+                };
 
-                    // Instantiate and draw our chart, passing in some options.
-                    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-                    chart.draw(data, options);
-                });
-        }
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            });
+    }
     </script>
 </body>
 

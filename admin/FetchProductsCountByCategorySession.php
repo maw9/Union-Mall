@@ -15,7 +15,7 @@ $total_products_per_cat = [];
 foreach ($categories as $each_cat) {
     array_push($category_names, $each_cat['name']);
     $id = $each_cat['id'];
-    $fetch_product_count_by_cat = "SELECT COUNT(*) as total FROM $product_table WHERE $product_table.category_id = $id";
+    $fetch_product_count_by_cat = "SELECT SUM(quantity) as total FROM $product_table WHERE $product_table.category_id = $id";
 
     try {
         $stmt = $pdo->query($fetch_product_count_by_cat);
