@@ -43,6 +43,12 @@ if (isset($_POST['place-order'])) {
         $update_product_id = $each_item['id'];
         $update_stock = $each_item['stock'] - $each_item['qty'];
         $update_stock_query = "UPDATE $product_table SET quantity = $update_stock WHERE id = $update_product_id;";
+
+        try {
+            $pdo->exec($update_stock_query);
+        } catch (PDOException $pde) {
+            echo $pde->getMessage();
+        }
     }
     $values = implode(',', $product_inputs);
     $insert_order_product_query = "INSERT INTO $order_product_table (order_id, product_id, quantity) VALUES " . $values;
@@ -102,12 +108,12 @@ if (isset($_POST['place-order'])) {
                 <div class="first-container mt-5">
                     <div class="container cart-items">
                         <?php foreach ($cart_items as $item) : ?>
-                            <div class="row mb-3">
-                                <div class="col-9">
-                                    <?= $item['qty'] ?>x <?= $item['name'] ?>
-                                </div>
-                                <div class="col-3"><?= $item['qty'] * $item['price'] ?> MMK</div>
+                        <div class="row mb-3">
+                            <div class="col-9">
+                                <?= $item['qty'] ?>x <?= $item['name'] ?>
                             </div>
+                            <div class="col-3"><?= $item['qty'] * $item['price'] ?> MMK</div>
+                        </div>
                         <?php endforeach ?>
                     </div>
                     <div class="container calculation">
@@ -146,7 +152,8 @@ if (isset($_POST['place-order'])) {
                         </div>
                         <div class="mb-3">
                             <label for="delivery-address" class="form-label">Address</label>
-                            <textarea name="delivery-address" id="delivery-address" class="form-control" rows="3" placeholder="Enter delivery address" required></textarea>
+                            <textarea name="delivery-address" id="delivery-address" class="form-control" rows="3"
+                                placeholder="Enter delivery address" required></textarea>
                         </div>
                     </div>
 
@@ -156,18 +163,22 @@ if (isset($_POST['place-order'])) {
                         <img class="accept-payments" src="../icons/payments.png">
                         <div class="mb-3 mt-4">
                             <label for="card-holder" class="form-label">Card Holder Name</label>
-                            <input type="text" class="form-control" id="card-holder" name="card-holder" placeholder="Enter card holder name" required>
+                            <input type="text" class="form-control" id="card-holder" name="card-holder"
+                                placeholder="Enter card holder name" required>
                         </div>
                         <div class="mb-3">
                             <label for="card-number" class="form-label">Card Number</label>
-                            <input type="number" class="form-control" id="card-number" name="card-number" placeholder="Enter your card number" required>
+                            <input type="number" class="form-control" id="card-number" name="card-number"
+                                placeholder="Enter your card number" required>
                         </div>
                         <div class="mb-3">
                             <label for="expiration-month" class="form-label">Expiration</label>
                             <br>
-                            <input type="text" id="expiration-month" name="expiration-month" placeholder="MM" minlength=2 maxlength=2 required>
+                            <input type="text" id="expiration-month" name="expiration-month" placeholder="MM"
+                                minlength=2 maxlength=2 required>
                             <span>/</span>
-                            <input type="text" id="expiration-year" name="expiration-year" placeholder="YY" minlength=2 maxlength=2 required>
+                            <input type="text" id="expiration-year" name="expiration-year" placeholder="YY" minlength=2
+                                maxlength=2 required>
                         </div>
 
                         <div class="mb-3">
