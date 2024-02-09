@@ -29,7 +29,8 @@ if (isset($_SESSION['cart'][$product_id])) {
             "name" => $product['name'],
             "price" => $product['price'],
             "size" => $product['size'],
-            "img_url" => $product['image_url']
+            "img_url" => $product['image_url'],
+            "stock" => $product['quantity']
         ];
     }
 }

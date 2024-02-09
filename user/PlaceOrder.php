@@ -36,10 +36,13 @@ if (isset($_POST['place-order'])) {
         echo $pde->getMessage();
     }
 
-
     $product_inputs = [];
     foreach ($_SESSION['cart'] as $each_item) {
         array_push($product_inputs, "('$order_id', '{$each_item['id']}', '{$each_item['qty']}')");
+
+        $update_product_id = $each_item['id'];
+        $update_stock = $each_item['stock'] - $each_item['qty'];
+        $update_stock_query = "UPDATE $product_table SET quantity = $update_stock WHERE id = $update_product_id;";
     }
     $values = implode(',', $product_inputs);
     $insert_order_product_query = "INSERT INTO $order_product_table (order_id, product_id, quantity) VALUES " . $values;
