@@ -35,3 +35,40 @@
     margin-top: 16px;
     font-size: 18px;
 }
+
+.cart-action-container {
+    height: 64px;
+    width: 80%;
+    margin-top:48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-action-container div {
+    display: none;
+}
+
+.cart-action-container div button {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.cart-action-container div button:hover {
+    width: 60px;
+    height: 60px;
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+}
+
+.add-to-cart-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

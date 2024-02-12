@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("../style/Head.php");
 require_once("../database/TableNames.php");
 require_once("../database/Connect.php");
@@ -65,6 +66,26 @@ try {
                                 <div class="product-tag me-2"><?= $each['name'] ?></div>
                                 <?php endforeach; ?>
                             </div>
+                            <div class="cart-action-container">
+                                <div id="qty-controls-<?= $product['id'] ?>" class="qty-controls"
+                                    style="display: <?= (isset($_SESSION['cart'][$product['id']]) && ($_SESSION['cart'][$product['id']]['qty'] > 0)) ? "block" : "none" ?>">
+                                    <button class="minus-btn" onClick="on_remove_from_cart(<?= $product['id'] ?>)"><i
+                                            class="fa-solid fa-minus"></i></i></button>
+                                    <span id="qty-product-<?= $product['id'] ?>"
+                                        class="mx-4"><?= $_SESSION['cart'][$product['id']]['qty'] ?></span>
+                                    <button id="plus-btn-<?= $product['id'] ?>" class="plus-btn"
+                                        onClick="on_add_to_cart(<?= $product['id'] ?>)"><i
+                                            class="fa-solid fa-plus"></i></button>
+                                </div>
+
+                                <button onClick="on_add_to_cart(<?= $product['id'] ?>)" class="add-to-cart-btn"
+                                    id="add-to-cart-<?= $product['id'] ?>"
+                                    <?php if ($product['quantity'] <= 0) : echo "disabled";
+                                                                                                                                                                            endif ?>
+                                    style="display: <?= (!isset($_SESSION['cart'][$product['id']]) || ($_SESSION['cart'][$product['id']]['qty'] < 1)) ? "block" : "none" ?>">
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,6 +93,48 @@ try {
             <div class="col-1"></div>
         </div>
     </div>
+
+    <script>
+    function on_add_to_cart(item_id) {
+        const request = new Request(`AddToCartSession.php?product_id=${item_id}`)
+        fetch(request)
+            .then((response) => response.json())
+            .then((result) => {
+                const add_to_cart_btn = document.querySelector(`#add-to-cart-${item_id}`);
+                add_to_cart_btn.style.display = 'none';
+
+                const qty_controls = document.querySelector(`#qty-controls-${item_id}`);
+                qty_controls.style.display = 'block';
+
+                const plus_btn = document.querySelector(`#plus-btn-${item_id}`);
+                plus_btn.disabled = !result.is_enable_to_add_more;
+
+                const specific_product_qty = document.querySelector(`#qty-product-${item_id}`);
+                specific_product_qty.textContent = result.product_qty;
+            });
+    }
+
+    function on_remove_from_cart(item_id) {
+        const request = new Request(`RemoveFromCartSession.php?product_id=${item_id}`)
+        fetch(request)
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.product_qty == 0) {
+                    const add_to_cart_btn = document.querySelector(`#add-to-cart-${item_id}`);
+                    add_to_cart_btn.style.display = 'block';
+
+                    const qty_controls = document.querySelector(`#qty-controls-${item_id}`);
+                    qty_controls.style.display = 'none';
+                }
+
+                const plus_btn = document.querySelector(`#plus-btn-${item_id}`);
+                plus_btn.disabled = !result.is_enable_to_add_more;
+
+                const specific_product_qty = document.querySelector(`#qty-product-${item_id}`);
+                specific_product_qty.textContent = result.product_qty;
+            });
+    }
+    </script>
 </body>
 
 </html>
