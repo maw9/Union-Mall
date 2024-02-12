@@ -21,7 +21,8 @@ try {
     echo $pde->getMessage();
 }
 
-function removeDuplicates($array, $attribute) {
+function removeDuplicates($array, $attribute)
+{
     $uniqueValues = array();
     $result = array();
     foreach ($array as $item) {
@@ -106,6 +107,51 @@ function removeDuplicates($array, $attribute) {
             </div>
         </div>
     </div>
+    <script>
+    function on_product_click(product_id) {
+        window.location.href = `ProductDetail.php?product_id=${product_id}`;
+    }
+
+    function on_add_to_cart(item_id) {
+        const request = new Request(`AddToCartSession.php?product_id=${item_id}`)
+        fetch(request)
+            .then((response) => response.json())
+            .then((result) => {
+                const add_to_cart_btn = document.querySelector(`#add-to-cart-${item_id}`);
+                add_to_cart_btn.style.display = 'none';
+
+                const qty_controls = document.querySelector(`#qty-controls-${item_id}`);
+                qty_controls.style.display = 'block';
+
+                const plus_btn = document.querySelector(`#plus-btn-${item_id}`);
+                plus_btn.disabled = !result.is_enable_to_add_more;
+
+                const specific_product_qty = document.querySelector(`#qty-product-${item_id}`);
+                specific_product_qty.textContent = result.product_qty;
+            });
+    }
+
+    function on_remove_from_cart(item_id) {
+        const request = new Request(`RemoveFromCartSession.php?product_id=${item_id}`)
+        fetch(request)
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.product_qty == 0) {
+                    const add_to_cart_btn = document.querySelector(`#add-to-cart-${item_id}`);
+                    add_to_cart_btn.style.display = 'block';
+
+                    const qty_controls = document.querySelector(`#qty-controls-${item_id}`);
+                    qty_controls.style.display = 'none';
+                }
+
+                const plus_btn = document.querySelector(`#plus-btn-${item_id}`);
+                plus_btn.disabled = !result.is_enable_to_add_more;
+
+                const specific_product_qty = document.querySelector(`#qty-product-${item_id}`);
+                specific_product_qty.textContent = result.product_qty;
+            });
+    }
+    </script>
 </body>
 
 </html>
