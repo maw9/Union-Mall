@@ -51,8 +51,8 @@ try {
                         Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
                         phasellus mollis sit aliquam sit nullam neque ultrices.
                     </p>
-                    <a href="#" class="explore-products">EXPLORE PRODUCTS</a>
-                    <a href="#" class="about-us">ABOUT US</a>
+                    <a href="Products.php" class="explore-products">EXPLORE PRODUCTS</a>
+                    <a href="AboutUs.php" class="about-us">ABOUT US</a>
                 </div>
             </div>
             <div class="col hero-image-container"></div>
@@ -64,20 +64,44 @@ try {
         <div class="container">
             <div class="row row-cols-4">
                 <?php foreach ($popular_shrits as $each_shirt) : ?>
-                    <div class="col-3">
-                        <div class="product-card mx-1">
+                <div class="col-3">
+                    <div class="product-card mx-1">
+                        <div onClick="on_product_click(<?= $each_shirt['id'] ?>)">
                             <div class="image-and-price">
                                 <img src="<?= "../" . $each_shirt['image_url'] ?>" />
                                 <span><?= $each_shirt['price'] . " MMK" ?></span>
                             </div>
                             <h4><?= $each_shirt['name'] ?></h4>
-                            <button class="add-to-cart-btn">Add to Cart</button>
+                        </div>
+
+                        <div class="cart-action-container">
+                            <div id="qty-controls-<?= $each_shirt['id'] ?>" class="qty-controls"
+                                style="display: <?= (isset($_SESSION['cart'][$each_shirt['id']]) && ($_SESSION['cart'][$each_shirt['id']]['qty'] > 0)) ? "block" : "none" ?>">
+                                <button class="minus-btn" onClick="on_remove_from_cart(<?= $each_shirt['id'] ?>)"><i
+                                        class="fa-solid fa-minus"></i></i></button>
+                                <span id="qty-product-<?= $each_shirt['id'] ?>"
+                                    class="mx-4"><?= $_SESSION['cart'][$each_shirt['id']]['qty'] ?></span>
+                                <button id="plus-btn-<?= $each_shirt['id'] ?>" class="plus-btn"
+                                    onClick="on_add_to_cart(<?= $each_shirt['id'] ?>)"><i
+                                        class="fa-solid fa-plus"></i></button>
+                            </div>
+
+                            <button onClick="on_add_to_cart(<?= $each_shirt['id'] ?>)" class="add-to-cart-btn"
+                                id="add-to-cart-<?= $each_shirt['id'] ?>"
+                                <?php if ($each_shirt['quantity'] <= 0) : echo "disabled";
+                                                                                                                                                                endif ?>
+                                style="display: <?= (!isset($_SESSION['cart'][$each_shirt['id']]) || ($_SESSION['cart'][$each_shirt['id']]['qty'] < 1)) ? "block" : "none" ?>">
+                                Add to Cart
+                            </button>
+
                         </div>
                     </div>
+                </div>
                 <?php endforeach; ?>
             </div>
         </div>
-        <button class="view-all-btn">ALL SHRITS</button>
+        <button class="view-all-btn" onClick="window.location.href = 'Products.php?category_ids[0]=1'">ALL
+            SHRITS</button>
     </div>
 
     <div class="section-horizontal-divider"></div>
@@ -87,20 +111,44 @@ try {
         <div class="container">
             <div class="row row-cols-4">
                 <?php foreach ($popular_pants as $each_pants) : ?>
-                    <div class="col-3">
-                        <div class="product-card mx-1">
+                <div class="col-3">
+                    <div class="product-card mx-1">
+                        <div onClick="on_product_click(<?= $each_pants['id'] ?>)">
                             <div class="image-and-price">
                                 <img src="<?= "../" . $each_pants['image_url'] ?>" />
-                                <span><?= $each_shirt['price'] . " MMK" ?></span>
+                                <span><?= $each_pants['price'] . " MMK" ?></span>
                             </div>
                             <h4><?= $each_pants['name'] ?></h4>
-                            <button class="add-to-cart-btn">Add to Cart</button>
+                        </div>
+
+                        <div class="cart-action-container">
+                            <div id="qty-controls-<?= $each_pants['id'] ?>" class="qty-controls"
+                                style="display: <?= (isset($_SESSION['cart'][$each_pants['id']]) && ($_SESSION['cart'][$each_pants['id']]['qty'] > 0)) ? "block" : "none" ?>">
+                                <button class="minus-btn" onClick="on_remove_from_cart(<?= $each_pants['id'] ?>)"><i
+                                        class="fa-solid fa-minus"></i></i></button>
+                                <span id="qty-product-<?= $each_pants['id'] ?>"
+                                    class="mx-4"><?= $_SESSION['cart'][$each_pants['id']]['qty'] ?></span>
+                                <button id="plus-btn-<?= $each_pants['id'] ?>" class="plus-btn"
+                                    onClick="on_add_to_cart(<?= $each_pants['id'] ?>)"><i
+                                        class="fa-solid fa-plus"></i></button>
+                            </div>
+
+                            <button onClick="on_add_to_cart(<?= $each_pants['id'] ?>)" class="add-to-cart-btn"
+                                id="add-to-cart-<?= $each_pants['id'] ?>"
+                                <?php if ($each_pants['quantity'] <= 0) : echo "disabled";
+                                                                                                                                                                endif ?>
+                                style="display: <?= (!isset($_SESSION['cart'][$each_pants['id']]) || ($_SESSION['cart'][$each_pants['id']]['qty'] < 1)) ? "block" : "none" ?>">
+                                Add to Cart
+                            </button>
+
                         </div>
                     </div>
+                </div>
                 <?php endforeach; ?>
             </div>
         </div>
-        <button class="view-all-btn">ALL PANTS</button>
+        <button class="view-all-btn" onClick="window.location.href = 'Products.php?category_ids[0]=2'">ALL
+            PANTS</button>
     </div>
 
     <div class="section-horizontal-divider"></div>
@@ -110,20 +158,44 @@ try {
         <div class="container">
             <div class="row row-cols-4">
                 <?php foreach ($popular_watches as $each_watch) : ?>
-                    <div class="col-3">
-                        <div class="product-card mx-1">
+                <div class="col-3">
+                    <div class="product-card mx-1">
+                        <div onClick="on_product_click(<?= $each_watch['id'] ?>)">
                             <div class="image-and-price">
                                 <img src="<?= "../" . $each_watch['image_url'] ?>" />
                                 <span><?= $each_watch['price'] . " MMK" ?></span>
                             </div>
                             <h4><?= $each_watch['name'] ?></h4>
-                            <button class="add-to-cart-btn">Add to Cart</button>
+                        </div>
+
+                        <div class="cart-action-container">
+                            <div id="qty-controls-<?= $each_watch['id'] ?>" class="qty-controls"
+                                style="display: <?= (isset($_SESSION['cart'][$each_watch['id']]) && ($_SESSION['cart'][$each_watch['id']]['qty'] > 0)) ? "block" : "none" ?>">
+                                <button class="minus-btn" onClick="on_remove_from_cart(<?= $each_watch['id'] ?>)"><i
+                                        class="fa-solid fa-minus"></i></i></button>
+                                <span id="qty-product-<?= $each_watch['id'] ?>"
+                                    class="mx-4"><?= $_SESSION['cart'][$each_watch['id']]['qty'] ?></span>
+                                <button id="plus-btn-<?= $each_watch['id'] ?>" class="plus-btn"
+                                    onClick="on_add_to_cart(<?= $each_watch['id'] ?>)"><i
+                                        class="fa-solid fa-plus"></i></button>
+                            </div>
+
+                            <button onClick="on_add_to_cart(<?= $each_watch['id'] ?>)" class="add-to-cart-btn"
+                                id="add-to-cart-<?= $each_watch['id'] ?>"
+                                <?php if ($each_watch['quantity'] <= 0) : echo "disabled";
+                                                                                                                                                                endif ?>
+                                style="display: <?= (!isset($_SESSION['cart'][$each_watch['id']]) || ($_SESSION['cart'][$each_watch['id']]['qty'] < 1)) ? "block" : "none" ?>">
+                                Add to Cart
+                            </button>
+
                         </div>
                     </div>
+                </div>
                 <?php endforeach; ?>
             </div>
         </div>
-        <button class="view-all-btn">ALL Watches</button>
+        <button class="view-all-btn" onClick="window.location.href = 'Products.php?category_ids[0]=3'">ALL
+            Watches</button>
     </div>
 
     <div class="section-horizontal-divider"></div>
@@ -194,6 +266,60 @@ try {
             <p>&copy; Copyright Metro 2023. Designed and Developed by Fun Tech</p>
         </div>
     </footer>
+
+    <script>
+    function on_add_to_cart(item_id) {
+        const request = new Request(`AddToCartSession.php?product_id=${item_id}`)
+        fetch(request)
+            .then((response) => response.json())
+            .then((result) => {
+                const cart_item_qty = document.querySelector(".badge");
+                cart_item_qty.textContent = result.cart_total_qty;
+
+                const add_to_cart_btn = document.querySelector(`#add-to-cart-${item_id}`);
+                add_to_cart_btn.style.display = 'none';
+
+                const qty_controls = document.querySelector(`#qty-controls-${item_id}`);
+                qty_controls.style.display = 'block';
+
+                const plus_btn = document.querySelector(`#plus-btn-${item_id}`);
+                plus_btn.disabled = !result.is_enable_to_add_more;
+
+                const badge_circle = document.querySelector(".badge");
+                badge_circle.style.display = 'block';
+
+                const specific_product_qty = document.querySelector(`#qty-product-${item_id}`);
+                specific_product_qty.textContent = result.product_qty;
+            });
+    }
+
+    function on_remove_from_cart(item_id) {
+        const request = new Request(`RemoveFromCartSession.php?product_id=${item_id}`)
+        fetch(request)
+            .then((response) => response.json())
+            .then((result) => {
+                const cart_item_qty = document.querySelector(".badge");
+                cart_item_qty.textContent = result.cart_total_qty;
+
+                if (result.product_qty == 0) {
+                    const add_to_cart_btn = document.querySelector(`#add-to-cart-${item_id}`);
+                    add_to_cart_btn.style.display = 'block';
+
+                    const qty_controls = document.querySelector(`#qty-controls-${item_id}`);
+                    qty_controls.style.display = 'none';
+
+                    const badge_circle = document.querySelector(".badge");
+                    badge_circle.style.display = 'none';
+                }
+
+                const plus_btn = document.querySelector(`#plus-btn-${item_id}`);
+                plus_btn.disabled = !result.is_enable_to_add_more;
+
+                const specific_product_qty = document.querySelector(`#qty-product-${item_id}`);
+                specific_product_qty.textContent = result.product_qty;
+            });
+    }
+    </script>
 </body>
 
 </html>
