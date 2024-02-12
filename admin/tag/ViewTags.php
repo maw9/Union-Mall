@@ -13,14 +13,14 @@ try {
 }
 
 if (isset($_POST['edit'])) {
-    $id = $_POST['cat_id'];
-    $name = $_POST['cat_name'];
-    header("Location: UpdateCategory.php?cat_id=$id&cat_name=$name");
+    $id = $_POST['tag_id'];
+    $name = $_POST['tag_name'];
+    header("Location: UpdateTag.php?tag_id=$id&tag_name=$name");
 }
 
 if (isset($_POST['delete'])) {
-    $id = $_POST['cat_id'];
-    header("Location: DeleteCategory.php?cat_id=$id");
+    $id = $_POST['tag_id'];
+    header("Location: DeleteTag.php?tag_id=$id");
 }
 
 ?>
@@ -82,6 +82,7 @@ if (isset($_POST['delete'])) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
+                            <a href="CreateTag.php" class="btn btn-primary mb-3">Create New Tag</a>
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
@@ -93,17 +94,20 @@ if (isset($_POST['delete'])) {
 
                                 <tbody>
                                     <?php foreach ($tags as $each) : ?>
-                                        <tr>
-                                            <td><?= $each['id'] ?></td>
-                                            <td><?= $each['name'] ?></td>
-                                            <td>
-                                                <form method="post">
-                                                    <input type="text" hidden name="id" value="<?= $each['id'] ?>">
-                                                    <button class="btn btn-primary btn-sm" name="edit"><i class="fa-regular fa-pen-to-square"></i></button>
-                                                    <button class="btn btn-danger btn-sm" name="delete"><i class="fa-solid fa-trash"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td><?= $each['id'] ?></td>
+                                        <td><?= $each['name'] ?></td>
+                                        <td>
+                                            <form method="post">
+                                                <input type="text" hidden name="tag_id" value="<?= $each['id'] ?>">
+                                                <input type="text" hidden name="tag_name" value="<?= $each['name'] ?>">
+                                                <button class="btn btn-primary btn-sm" name="edit"><i
+                                                        class="fa-regular fa-pen-to-square"></i></button>
+                                                <button class="btn btn-danger btn-sm" name="delete"><i
+                                                        class="fa-solid fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
