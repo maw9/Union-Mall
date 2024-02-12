@@ -51,7 +51,7 @@ if (isset($_POST['update'])) {
                 </div>
                 <?php if (isset($_GET['success'])): ?>
                 <div class="alert alert-success mt-3" role="alert">
-                    A simple success alert—check it out!
+                    Tag has successfully updated!
                 </div>
                 <?php endif; ?>
                 <a href="ViewTags.php" class="btn btn-outline-primary mt-4">Go Back</a>

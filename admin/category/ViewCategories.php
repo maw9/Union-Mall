@@ -13,13 +13,13 @@ try {
 }
 
 if (isset($_POST['edit'])) {
-    $id = $_POST['cat_id'];
-    $name = $_POST['cat_name'];
+    $id = $_POST['id'];
+    $name = $_POST['name'];
     header("Location: UpdateCategory.php?cat_id=$id&cat_name=$name");
 }
 
 if (isset($_POST['delete'])) {
-    $id = $_POST['cat_id'];
+    $id = $_POST['id'];
     header("Location: DeleteCategory.php?cat_id=$id");
 }
 
@@ -83,6 +83,7 @@ if (isset($_POST['delete'])) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
+                            <a href="CreateCategory.php" class="btn btn-primary mb-3">Create New Category</a>
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
@@ -94,17 +95,20 @@ if (isset($_POST['delete'])) {
 
                                 <tbody>
                                     <?php foreach ($categories as $each) : ?>
-                                        <tr>
-                                            <td><?= $each['id'] ?></td>
-                                            <td><?= $each['name'] ?></td>
-                                            <td>
-                                                <form method="post">
-                                                    <input type="text" hidden name="id" value="<?= $each['id'] ?>">
-                                                    <button class="btn btn-primary btn-sm" name="edit"><i class="fa-regular fa-pen-to-square"></i></button>
-                                                    <button class="btn btn-danger btn-sm" name="delete"><i class="fa-solid fa-trash"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td><?= $each['id'] ?></td>
+                                        <td><?= $each['name'] ?></td>
+                                        <td>
+                                            <form method="post">
+                                                <input type="text" hidden name="id" value="<?= $each['id'] ?>">
+                                                <input type="text" hidden name="name" value="<?= $each['name'] ?>">
+                                                <button class="btn btn-primary btn-sm" name="edit"><i
+                                                        class="fa-regular fa-pen-to-square"></i></button>
+                                                <button class="btn btn-danger btn-sm" name="delete"><i
+                                                        class="fa-solid fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>

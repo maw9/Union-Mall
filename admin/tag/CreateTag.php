@@ -47,7 +47,7 @@ if (isset($_POST['create'])) {
                 </div>
                 <?php if (isset($_GET['success'])): ?>
                 <div class="alert alert-success mt-3" role="alert">
-                    A simple success alert—check it out!
+                    New tag has successfully created!
                 </div>
                 <?php endif; ?>
                 <a href="ViewTags.php" class="btn btn-outline-primary mt-4">Go Back</a>
