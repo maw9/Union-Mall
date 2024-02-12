@@ -40,12 +40,12 @@ if (isset($_SESSION['cart'])) {
         </ul>
         <h1>Union Mall</h1>
         <div class="search-cart-container">
-            <form>
-                <div class="search-box me-4">
-                    <img src="../icons/ic_search.png" />
-                    <input type="text" placeholder="SEARCH FOR PRODUCTS" />
-                </div>
-            </form>
+
+            <div class="search-box me-4">
+                <img src="../icons/ic_search.png" />
+                <input type="text" id="search-input" placeholder="SEARCH FOR PRODUCTS" />
+            </div>
+
             <a href="Cart.php">
                 <div class="cart-with-badge">
                     <img class="cart" src="../icons/ic_shopping_bag.png" />
@@ -56,14 +56,22 @@ if (isset($_SESSION['cart'])) {
             <a href="Profile.php" class="ms-4">
                 <div class="profile" data-bs-toggle="tooltip" data-bs-title="<?= $username ?>">
                     <i class="fa-regular fa-user" style="display: <?= !isset($user) ? "visible" : "none" ?>"></i>
-                    <img src="<?= "../" . $user['profile_url'] ?>" style="display: <?= isset($user) ? "visible" : "none" ?>">
+                    <img src="<?= "../" . $user['profile_url'] ?>"
+                        style="display: <?= isset($user) ? "visible" : "none" ?>">
                 </div>
             </a>
         </div>
     </div>
     <script>
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            window.location.href = `SearchResults.php?keyword=${event.target.value}`;
+        }
+    })
     </script>
 </body>
 

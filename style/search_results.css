@@ -1,0 +1,35 @@
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 24px;
+}
+
+.search-box img {
+    width: 20px;
+    height: 20px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 20vw;
+    height: 40px;
+    margin-left: 16px;
+    font-size: 16px;
+}
+
+#search-title {
+    font-size: 60px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#search-result-label {
+    margin-top: 20px;
+    font-size: 20px;
+}
