@@ -251,7 +251,10 @@ try {
                             <!--Div that will hold the pie chart-->
                             <div id="chart_div" class="chart-card"></div>
                         </div>
-                        <div class="col-6"></div>
+                        <div class="col-6">
+                            <!--Div that will hold the column chart-->
+                            <div id="column_chart_div" class="chart-card"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -288,8 +291,6 @@ try {
                     chart_data[i] = [result.categories[i], Number(result.total_products_per_cat[i])];
                 }
 
-                console.log(chart_data);
-
                 data.addRows(chart_data);
 
                 // Set chart options
@@ -300,6 +301,10 @@ try {
 
                 // Instantiate and draw our chart, passing in some options.
                 var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.ColumnChart(document.getElementById('column_chart_div'));
                 chart.draw(data, options);
             });
     }
