@@ -70,10 +70,10 @@ if (isset($_POST['delete'])) {
                     <div id="account-section">
                         <h4>Account</h4>
                         <div class="nav-item">
-                            <a href=""><i class="fa-solid fa-user"></i>Profile</a>
+                            <a href="../profile/Profile.php"><i class="fa-solid fa-user"></i>Profile</a>
                         </div>
                         <div class="nav-item">
-                            <a href=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                            <a href="../LogoutAdmin.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                         </div>
                     </div>
                 </div>

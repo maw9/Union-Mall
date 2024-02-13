@@ -61,7 +61,7 @@ if (isset($_GET['edit'])) {
                             <a href="Profile.php"><i class="fa-solid fa-user"></i>Profile</a>
                         </div>
                         <div class="nav-item">
-                            <a href=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                            <a href="../LogoutAdmin.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                         </div>
                     </div>
                 </div>
