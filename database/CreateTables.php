@@ -54,6 +54,7 @@ $create_order_table = "CREATE TABLE IF NOT EXISTS sale_order (
     created_at DATE,
     user_id INT,
     total_amount FLOAT,
+    status VARCHAR(20),
     FOREIGN KEY (user_id) REFERENCES $user_table(id)
 );";
 
@@ -115,7 +116,7 @@ try {
 
     $pdo->exec($create_order_table);
     echo "Order table has been created!" . "<br>";
-    
+
     $pdo->exec($create_order_product_table);
     echo "Order Product Join table has been created!" . "<br>";
 

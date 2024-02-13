@@ -25,7 +25,7 @@ if (isset($_POST['place-order'])) {
     $created_at = date('Y-m-d');
     $total_amount =  $subtotal + $tax - $discount;
 
-    $insert_order_query = "INSERT INTO $order_table (created_at, user_id, total_amount) VALUES ('$created_at', '$user_id', '$total_amount')";
+    $insert_order_query = "INSERT INTO $order_table (created_at, user_id, total_amount, status) VALUES ('$created_at', '$user_id', '$total_amount', 'pending')";
 
     try {
         $result = $pdo->exec($insert_order_query);
