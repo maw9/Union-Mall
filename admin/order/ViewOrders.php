@@ -3,7 +3,7 @@ include_once("../../database/Connect.php");
 include_once("../../style/Head.php");
 include_once("../../database/TableNames.php");
 
-$fetch_orders = "SELECT $order_table.id, $order_table.created_at, $order_table.total_amount,
+$fetch_orders = "SELECT $order_table.id, $order_table.created_at, $order_table.total_amount, $order_table.status,
     $delivery_table.address, $delivery_table.date_to_deliver, $user_table.id as customer_id, $user_table.name
     FROM $order_table RIGHT JOIN $delivery_table ON $order_table.id = $delivery_table.order_id
     LEFT JOIN $user_table ON $user_table.id = $order_table.user_id;";
@@ -15,14 +15,30 @@ try {
     echo $pde->getMessage();
 }
 
-if (isset($_POST['edit'])) {
-    $id = $_POST['cat_id'];
-    $name = $_POST['cat_name'];
-    header("Location: UpdateCategory.php?cat_id=$id&cat_name=$name");
+if (isset($_POST['accept'])) {
+    $id = $_POST['id'];
+    $update_status_to_accept = "UPDATE $order_table SET status='accepted' WHERE id=$id";
+    try {
+        $pdo->exec($update_status_to_accept);
+        header("Location: ViewOrders.php");
+    } catch (PDOException $pde) {
+        echo $pde->getMessage();
+    }
+}
+
+if (isset($_POST['reject'])) {
+    $id = $_POST['id'];
+    $update_status_to_reject = "UPDATE $order_table SET status='rejected' WHERE id=$id";
+    try {
+        $pdo->exec($update_status_to_reject);
+        header("Location: ViewOrders.php");
+    } catch (PDOException $pde) {
+        echo $pde->getMessage();
+    }
 }
 
 if (isset($_POST['delete'])) {
-    $id = $_POST['cat_id'];
+    $id = $_POST['id'];
     header("Location: DeleteCategory.php?cat_id=$id");
 }
 
@@ -95,6 +111,7 @@ if (isset($_POST['delete'])) {
                                         <th>Delivery Date</th>
                                         <th>Customer ID</th>
                                         <th>Customer Name</th>
+                                        <th>Status</th>
                                         <th>Enabled Actions</th>
                                     </tr>
                                 </thead>
@@ -109,11 +126,16 @@ if (isset($_POST['delete'])) {
                                         <td><?= $each['date_to_deliver'] ?></td>
                                         <td><?= $each['customer_id'] ?></td>
                                         <td><?= $each['name'] ?></td>
+                                        <td><?= ucfirst($each['status']) ?></td>
                                         <td>
                                             <form method="post">
                                                 <input type="text" hidden name="id" value="<?= $each['id'] ?>">
-                                                <button class="btn btn-primary btn-sm" name="edit"><i
-                                                        class="fa-regular fa-pen-to-square"></i></button>
+                                                <?php if ($each['status'] == "pending") : ?>
+                                                <button class="btn btn-success btn-sm" name="accept"><i
+                                                        class="fa-solid fa-check"></i></button>
+                                                <button class="btn btn-danger btn-sm" name="reject"><i
+                                                        class="fa-solid fa-xmark"></i></button>
+                                                <?php endif; ?>
                                                 <button class="btn btn-danger btn-sm" name="delete"><i
                                                         class="fa-solid fa-trash"></i></button>
                                             </form>

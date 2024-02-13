@@ -60,12 +60,12 @@ if (isset($_SESSION['user'])) {
                         </div>
                         <div class="col-2 ps-4" style="color: <?php if ($each['status'] == "pending") {
                                                                         echo "rgb(223, 172, 85)";
-                                                                    } else if ($each['status'] == "accept") {
+                                                                    } else if ($each['status'] == "accepted") {
                                                                         echo "rgb(127, 183, 98)";
                                                                     } else {
                                                                         echo "rgb(189, 84, 80)";
                                                                     }  ?>">
-                            <?= $each['status'] ?>
+                            <?= ucfirst($each['status']) ?>
                         </div>
                     </div>
                     <?php endforeach; ?>

@@ -60,14 +60,14 @@ try {
             <div class="col-8">
                 <div class="d-flex justify-content-between align-items-center">
                     <h1 class="mt-4">Order History Details</h1>
-                    <div class="col-2 ps-4" style="font-size: 24px; font-weight: 500; color: <?php if ($order['status'] == "pending") {
-                                                                                                    echo "rgb(223, 172, 85)";
-                                                                                                } else if ($each['status'] == "accept") {
-                                                                                                    echo "rgb(127, 183, 98)";
-                                                                                                } else {
-                                                                                                    echo "rgb(189, 84, 80)";
-                                                                                                }  ?>">
-                        <?= $order['status'] ?>
+                    <div class="col-2 ps-4" style="color: <?php if ($order['status'] == "pending") {
+                                                                echo "rgb(223, 172, 85)";
+                                                            } else if ($order['status'] == "accepted") {
+                                                                echo "rgb(127, 183, 98)";
+                                                            } else {
+                                                                echo "rgb(189, 84, 80)";
+                                                            }  ?>; font-weight: 500; font-size: 24px">
+                        <?= ucfirst($order['status']) ?>
                     </div>
                 </div>
                 <h3 class="mt-5"><i class="fa-solid fa-bag-shopping me-3"></i>Purchased Items</h3>
