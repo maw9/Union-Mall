@@ -246,7 +246,7 @@ try {
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-4">
+                    <div class="row mt-4 mb-3">
                         <div class="col-6">
                             <!--Div that will hold the pie chart-->
                             <div id="chart_div" class="chart-card"></div>

@@ -73,7 +73,7 @@ if (isset($_POST['delete'])) {
                     <div id="account-section">
                         <h4>Account</h4>
                         <div class="nav-item">
-                            <a href=""><i class="fa-solid fa-user"></i>Profile</a>
+                            <a href="../profile/Profile.php"><i class="fa-solid fa-user"></i>Profile</a>
                         </div>
                         <div class="nav-item">
                             <a href=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
@@ -101,22 +101,24 @@ if (isset($_POST['delete'])) {
 
                                 <tbody>
                                     <?php foreach ($orders as $each) : ?>
-                                        <tr>
-                                            <td><?= $each['id'] ?></td>
-                                            <td><?= $each['created_at'] ?></td>
-                                            <td><?= $each['total_amount'] ?></td>
-                                            <td><?= $each['address'] ?></td>
-                                            <td><?= $each['date_to_deliver'] ?></td>
-                                            <td><?= $each['customer_id'] ?></td>
-                                            <td><?= $each['name'] ?></td>
-                                            <td>
-                                                <form method="post">
-                                                    <input type="text" hidden name="id" value="<?= $each['id'] ?>">
-                                                    <button class="btn btn-primary btn-sm" name="edit"><i class="fa-regular fa-pen-to-square"></i></button>
-                                                    <button class="btn btn-danger btn-sm" name="delete"><i class="fa-solid fa-trash"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td><?= $each['id'] ?></td>
+                                        <td><?= $each['created_at'] ?></td>
+                                        <td><?= $each['total_amount'] ?></td>
+                                        <td><?= $each['address'] ?></td>
+                                        <td><?= $each['date_to_deliver'] ?></td>
+                                        <td><?= $each['customer_id'] ?></td>
+                                        <td><?= $each['name'] ?></td>
+                                        <td>
+                                            <form method="post">
+                                                <input type="text" hidden name="id" value="<?= $each['id'] ?>">
+                                                <button class="btn btn-primary btn-sm" name="edit"><i
+                                                        class="fa-regular fa-pen-to-square"></i></button>
+                                                <button class="btn btn-danger btn-sm" name="delete"><i
+                                                        class="fa-solid fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
