@@ -31,6 +31,18 @@ if (isset($_POST['reject'])) {
     $update_status_to_reject = "UPDATE $order_table SET status='rejected' WHERE id=$id";
     try {
         $pdo->exec($update_status_to_reject);
+        $fetch_ordered_stocks = "SELECT * FROM $order_product_table WHERE order_id=$id";
+        $stmt = $pdo->query($fetch_ordered_stocks);
+        $ordered_stocks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($ordered_stocks as $each) {
+            $product_id = $each['product_id'];
+            $fetch_stock_qty = "SELECT quantity FROM $product_table WHERE id=$product_id";
+            $stock_stmt = $pdo->query($fetch_stock_qty);
+            $stock_qty = $stock_stmt->fetch(PDO::FETCH_ASSOC);
+            $updated_qty = $stock_qty['quantity'] + $each['quantity'];
+            $restock_query = "UPDATE $product_table SET quantity=$updated_qty WHERE id=$product_id";
+            $pdo->exec($restock_query);
+        }
         header("Location: ViewOrders.php");
     } catch (PDOException $pde) {
         echo $pde->getMessage();
@@ -39,7 +51,7 @@ if (isset($_POST['reject'])) {
 
 if (isset($_POST['delete'])) {
     $id = $_POST['id'];
-    header("Location: DeleteCategory.php?cat_id=$id");
+    header("Location: DeleteOrder.php?id=$id");
 }
 
 ?>
