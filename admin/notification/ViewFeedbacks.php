@@ -12,15 +12,9 @@ try {
     echo $pde->getMessage();
 }
 
-if (isset($_POST['edit'])) {
-    $id = $_POST['cat_id'];
-    $name = $_POST['cat_name'];
-    header("Location: UpdateCategory.php?cat_id=$id&cat_name=$name");
-}
-
 if (isset($_POST['delete'])) {
-    $id = $_POST['cat_id'];
-    header("Location: DeleteCategory.php?cat_id=$id");
+    $id = $_POST['id'];
+    header("Location: DeleteFeedback.php?id=$id");
 }
 
 ?>
@@ -106,8 +100,6 @@ if (isset($_POST['delete'])) {
                                         <td>
                                             <form method="post">
                                                 <input type="text" hidden name="id" value="<?= $each['id'] ?>">
-                                                <button class="btn btn-primary btn-sm" name="edit"><i
-                                                        class="fa-regular fa-pen-to-square"></i></button>
                                                 <button class="btn btn-danger btn-sm" name="delete"><i
                                                         class="fa-solid fa-trash"></i></button>
                                             </form>
