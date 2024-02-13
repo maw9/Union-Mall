@@ -37,27 +37,37 @@ if (isset($_SESSION['user'])) {
             <div class="col-2"></div>
             <div class="col-8">
                 <h1 class="order-history-title mb-4">Orders History</h1>
-                <div class="container">
+                <div class="container-fluid">
                     <?php if (sizeof($order_histories) == 0) : ?>
-                        <div class="empty-order">
-                            There is no order made.
-                        </div>
+                    <div class="empty-order">
+                        There is no order made.
+                    </div>
                     <?php endif; ?>
                     <?php foreach ($order_histories as $each) : ?>
-                        <div class="row order-item mb-4" onClick="window.location.href = 'OrderHistoryDetail.php?order_id=<?= $each['id'] ?>';">
-                            <div class="col-1">
-                                <i class="fa-solid fa-dolly"></i>
-                            </div>
-                            <div class="col-4 ps-5">
-                                Order ID: <?= $each['id'] ?>
-                            </div>
-                            <div class="col-4">
-                                Total: <?= $each['total_amount'] ?> MMK
-                            </div>
-                            <div class="col-3">
-                                <?= $each['created_at'] ?>
-                            </div>
+                    <div class="row order-item mb-4"
+                        onClick="window.location.href = 'OrderHistoryDetail.php?order_id=<?= $each['id'] ?>';">
+                        <div class="col-1">
+                            <i class="fa-solid fa-dolly"></i>
                         </div>
+                        <div class="col-3">
+                            Order ID: <?= $each['id'] ?>
+                        </div>
+                        <div class="col-4">
+                            Total: <?= $each['total_amount'] ?> MMK
+                        </div>
+                        <div class="col-2">
+                            <?= $each['created_at'] ?>
+                        </div>
+                        <div class="col-2 ps-4" style="color: <?php if ($each['status'] == "pending") {
+                                                                        echo "rgb(223, 172, 85)";
+                                                                    } else if ($each['status'] == "accept") {
+                                                                        echo "rgb(127, 183, 98)";
+                                                                    } else {
+                                                                        echo "rgb(189, 84, 80)";
+                                                                    }  ?>">
+                            <?= $each['status'] ?>
+                        </div>
+                    </div>
                     <?php endforeach; ?>
                 </div>
             </div>

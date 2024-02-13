@@ -5,6 +5,15 @@ require_once("../database/Connect.php");
 
 $order_id = $_GET['order_id'];
 
+$fetch_order_info = "SELECT status FROM $order_table WHERE id=$order_id";
+
+try {
+    $stmt = $pdo->query($fetch_order_info);
+    $order = $stmt->fetch(PDO::FETCH_ASSOC);
+} catch (PDOException $pde) {
+    echo $pde->getMessage();
+}
+
 $include_items_query = "SELECT $order_product_table.*, $product_table.name, $product_table.price, $product_table.image_url 
     FROM $order_product_table LEFT JOIN 
     $product_table ON $order_product_table.product_id = $product_table.id WHERE $order_product_table.order_id=$order_id;";
@@ -49,19 +58,30 @@ try {
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <h1 class="mt-4">Order History Details</h1>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1 class="mt-4">Order History Details</h1>
+                    <div class="col-2 ps-4" style="font-size: 24px; font-weight: 500; color: <?php if ($order['status'] == "pending") {
+                                                                                                    echo "rgb(223, 172, 85)";
+                                                                                                } else if ($each['status'] == "accept") {
+                                                                                                    echo "rgb(127, 183, 98)";
+                                                                                                } else {
+                                                                                                    echo "rgb(189, 84, 80)";
+                                                                                                }  ?>">
+                        <?= $order['status'] ?>
+                    </div>
+                </div>
                 <h3 class="mt-5"><i class="fa-solid fa-bag-shopping me-3"></i>Purchased Items</h3>
                 <div class="container include-items mt-4">
                     <?php foreach ($include_items as $item) : ?>
-                        <div class="row ordered-item mb-3">
-                            <div class="col-3">
-                                <img src="../<?= $item['image_url'] ?>">
-                            </div>
-                            <div class="col-6">
-                                <?= $item['quantity'] ?>x <?= $item['name'] ?>
-                            </div>
-                            <div class="col-3"><?= $item['quantity'] * $item['price'] ?> MMK</div>
+                    <div class="row ordered-item mb-3">
+                        <div class="col-3">
+                            <img src="../<?= $item['image_url'] ?>">
                         </div>
+                        <div class="col-6">
+                            <?= $item['quantity'] ?>x <?= $item['name'] ?>
+                        </div>
+                        <div class="col-3"><?= $item['quantity'] * $item['price'] ?> MMK</div>
+                    </div>
                     <?php endforeach ?>
                 </div>
 
@@ -91,7 +111,8 @@ try {
 
                     <i class="fa-regular fa-calendar-xmark mt-3 payment"></i>
                     <span class="payment info-label ms-2">Expire MM/YY</span>
-                    <span class="payment info-value ms-1"><?= $payment_info['exp_month'] ?>/<?= $payment_info['exp_year'] ?></span>
+                    <span
+                        class="payment info-value ms-1"><?= $payment_info['exp_month'] ?>/<?= $payment_info['exp_year'] ?></span>
                     <br>
 
                     <i class="fa-solid fa-credit-card mt-3 payment"></i>
