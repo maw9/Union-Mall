@@ -12,6 +12,15 @@ try {
     echo $pde->getMessage();
 }
 
+$get_sizes = "SELECT * FROM $size_table;";
+
+try {
+    $stmt = $pdo->query($get_sizes);
+    $sizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $pde) {
+    echo $pde->getMessage();
+}
+
 if (isset($_POST['create'])) {
     $name = $_POST['product_name'];
     $cat_id = $_POST['cat_id'];
@@ -38,40 +47,63 @@ if (isset($_POST['create'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Product</title>
+    <link rel="stylesheet" href="../../style/create_update_form.css">
+
 </head>
 
 <body>
-    <div class="container m-5">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-3"></div>
-            <div class="col-6 bg-warning">
-                <h3 class="mt-3">Create Product</h3>
-                <form method="post">
-                    <div class="mb-3 mt-4">
-                        <label for="product_name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter product name" required>
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label for="category" class="form-label">Category</label>
-                        <select class="form-select" name="cat_id" id="category" aria-label="Default select example">
-                            <?php foreach ($categories as $each) : ?>
-                                <option value="<?= $each['id'] ?>"><?= $each['name'] ?></option>
-                            <?php endforeach ?>
-                        </select>
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label for="product_price" class="form-label">Price</label>
-                        <input type="number" class="form-control" id="product_price" name="product_price" placeholder="Enter price" required>
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label for="stock_quantity" class="form-label">Quantity</label>
-                        <input type="number" min="1" class="form-control" id="stock_quantity" name="stock_quantity" placeholder="Enter stock quantity" required>
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter description"></textarea>
-                    </div>
-                    <button class="btn btn-primary" name="create">Create</button>
+            <div class="col-6">
+                <div class="form-container">
+                    <h3>Create Product</h3>
+                    <form method="post">
+                        <div class="mb-3 mt-4">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                placeholder="Enter product name" required>
+                        </div>
+                        <div class="mb-3 mt-4">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="price" name="price"
+                                placeholder="Enter product price" required>
+                        </div>
+                        <div class="mb-3 mt-4">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity"
+                                placeholder="Enter product stock" required>
+                        </div>
+                        <div class="mb-3 mt-4">
+                            <label for="category" class="form-label">Category</label>
+                            <select name="category_id" id="category" class="form-control">
+                                <?php foreach ($categories as $cat): ?>
+                                <option value="<?= $cat['id'] ?>"><?= $cat['name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3 mt-4">
+                            <label for="size" class="form-label">Size</label>
+                            <select name="size_id" id="size" class="form-control">
+                                <?php foreach ($sizes as $size): ?>
+                                <option value="<?= $size['id'] ?>"><?= $size['name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3 mt-4">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" name="description" id="description" rows="3"
+                                placeholder="Enter product description" required></textarea>
+                        </div>
+                        <button class="btn btn-primary px-4" name="create">Create</button>
+                    </form>
+                </div>
+                <?php if (isset($_GET['success'])): ?>
+                <div class="alert alert-success mt-3" role="alert">
+                    New category has successfully created!
+                </div>
+                <?php endif; ?>
+                <a href="ViewCategories.php" class="btn btn-outline-primary mt-4">Go Back</a>
                 </form>
             </div>
             <div class="col-3"></div>

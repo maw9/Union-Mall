@@ -113,6 +113,7 @@ if (isset($_POST['edit'])) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
+                            <a href="CreateProduct.php" class="btn btn-primary mb-3">Create New Product</a>
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
@@ -130,25 +131,27 @@ if (isset($_POST['edit'])) {
 
                                 <tbody>
                                     <?php foreach ($products as $each) : ?>
-                                        <tr>
-                                            <td><?= $each['id'] ?></td>
-                                            <td><img src="../../<?= $each['image_url'] ?>"></td>
-                                            <td><?= $each['name'] ?></td>
-                                            <td><?= $each['category'] ?></td>
-                                            <td><?= $each['size'] ?></td>
-                                            <td><?= $each['quantity'] ?></td>
-                                            <td><?= $each['description'] ?></td>
-                                            <td>
-                                                <span><?= implode(", ", $each['tags']); ?></span>
-                                            </td>
-                                            <td>
-                                                <form method="post">
-                                                    <input type="text" hidden name="id" value="<?= $each['id'] ?>">
-                                                    <button class="btn btn-primary btn-sm" name="edit"><i class="fa-regular fa-pen-to-square"></i></button>
-                                                    <button class="btn btn-danger btn-sm" name="delete"><i class="fa-solid fa-trash"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td><?= $each['id'] ?></td>
+                                        <td><img src="../../<?= $each['image_url'] ?>"></td>
+                                        <td><?= $each['name'] ?></td>
+                                        <td><?= $each['category'] ?></td>
+                                        <td><?= $each['size'] ?></td>
+                                        <td><?= $each['quantity'] ?></td>
+                                        <td><?= $each['description'] ?></td>
+                                        <td>
+                                            <span><?= implode(", ", $each['tags']); ?></span>
+                                        </td>
+                                        <td>
+                                            <form method="post">
+                                                <input type="text" hidden name="id" value="<?= $each['id'] ?>">
+                                                <button class="btn btn-primary btn-sm" name="edit"><i
+                                                        class="fa-regular fa-pen-to-square"></i></button>
+                                                <button class="btn btn-danger btn-sm" name="delete"><i
+                                                        class="fa-solid fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
