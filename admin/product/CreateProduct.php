@@ -21,22 +21,56 @@ try {
     echo $pde->getMessage();
 }
 
-if (isset($_POST['create'])) {
-    $name = $_POST['product_name'];
-    $cat_id = $_POST['cat_id'];
-    $price = $_POST['product_price'];
-    $quantity = $_POST['stock_quantity'];
-    $description = $_POST['description'];
+$get_tags = "SELECT * FROM $tag_table;";
 
-    $insert_product = "INSERT INTO $product_table (id, category_id, name, price, quantity, description)
-     VALUES (0, '$cat_id', '$name', '$price', '$quantity', '$description');";
+try {
+    $stmt = $pdo->query($get_tags);
+    $tags = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $pde) {
+    echo $pde->getMessage();
+}
+
+function moveChosenImage()
+{
+    if (isset($_FILES['product_img']) && $_FILES['product_img']['size'] > 0) {
+        $fileName = $_FILES['product_img']['name'];
+        $isMoved = move_uploaded_file($_FILES['product_img']['tmp_name'], "../../images/" . $fileName);
+        return $isMoved ? $fileName : "";
+    }
+}
+
+if (isset($_POST['create'])) {
+    $name = $_POST['name'];
+    $price = $_POST['price'];
+    $quantity = $_POST['quantity'];
+    $cat_id = $_POST['category_id'];
+    $size_id = $_POST['size_id'];
+    $description = $_POST['description'];
+    $image_url = ($_FILES['product_img']['size'] > 0)  ? "images/" . moveChosenImage() : "";
+    $tags = $_POST['tags'];
+
+    $insert_product = "INSERT INTO $product_table (id, category_id, size_id, name, price, quantity, description, image_url)
+     VALUES (0, '$cat_id', '$size_id', '$name', '$price', '$quantity', '$description', '$image_url');";
 
     try {
-        $pdo->exec($insert_product);
-        echo "Product has been successfully added!";
+        $result = $pdo->exec($insert_product);
+        if ($result) {
+            $product_id = $pdo->lastInsertId();
+        }
     } catch (PDOException $pde) {
         echo $pde->getMessage();
     }
+
+    foreach ($tags as $tag) {
+        try {
+            $insert_product_tag = "INSERT INTO $product_tag_table (product_id, tag_id) VALUES ($product_id, $tag)";
+            $pdo->exec($insert_product_tag);
+        } catch (PDOException $pde) {
+            echo $pde->getMessage();
+        }
+    }
+
+    header("Location: CreateProduct.php?success=true");
 }
 ?>
 
@@ -58,7 +92,13 @@ if (isset($_POST['create'])) {
             <div class="col-6">
                 <div class="form-container">
                     <h3>Create Product</h3>
-                    <form method="post">
+                    <form method="post" class="mt-4" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <img id="product_pic" style="width: 90px; height: 90px; object-fit: cover;"
+                                class="bg-primary mb-3">
+                            <br>
+                            <input type="file" id="product_img" name="product_img">
+                        </div>
                         <div class="mb-3 mt-4">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name"
@@ -77,7 +117,7 @@ if (isset($_POST['create'])) {
                         <div class="mb-3 mt-4">
                             <label for="category" class="form-label">Category</label>
                             <select name="category_id" id="category" class="form-control">
-                                <?php foreach ($categories as $cat): ?>
+                                <?php foreach ($categories as $cat) : ?>
                                 <option value="<?= $cat['id'] ?>"><?= $cat['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -85,10 +125,19 @@ if (isset($_POST['create'])) {
                         <div class="mb-3 mt-4">
                             <label for="size" class="form-label">Size</label>
                             <select name="size_id" id="size" class="form-control">
-                                <?php foreach ($sizes as $size): ?>
+                                <?php foreach ($sizes as $size) : ?>
                                 <option value="<?= $size['id'] ?>"><?= $size['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
+                        </div>
+                        <div class="checkbox-container">
+                            <?php foreach ($tags as $tag) : ?>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="tag-<?= $tag['id'] ?>" name="tags[]"
+                                    value="<?= $tag['id'] ?>">
+                                <label for="tag-<?= $tag['id'] ?>"><?= $tag['name'] ?></label>
+                            </div>
+                            <?php endforeach; ?>
                         </div>
                         <div class="mb-3 mt-4">
                             <label for="description" class="form-label">Description</label>
@@ -98,17 +147,36 @@ if (isset($_POST['create'])) {
                         <button class="btn btn-primary px-4" name="create">Create</button>
                     </form>
                 </div>
-                <?php if (isset($_GET['success'])): ?>
+                <?php if (isset($_GET['success'])) : ?>
                 <div class="alert alert-success mt-3" role="alert">
-                    New category has successfully created!
+                    New product has successfully created!
                 </div>
                 <?php endif; ?>
-                <a href="ViewCategories.php" class="btn btn-outline-primary mt-4">Go Back</a>
+                <a href="ViewProducts.php" class="btn btn-outline-primary my-4">Go Back</a>
                 </form>
             </div>
             <div class="col-3"></div>
         </div>
     </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const image = document.getElementById('product_pic');
+        const imageInput = document.getElementById('product_img');
+
+        imageInput.addEventListener("change", () => {
+            if (imageInput.files[0]) {
+                const fr = new FileReader();
+                fr.readAsDataURL(imageInput.files[0]);
+
+                fr.onload = (eve) => {
+                    image.src = eve.target.result;
+                }
+            }
+        })
+
+    })
+    </script>
 </body>
 
 </html>
